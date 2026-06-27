@@ -1,213 +1,154 @@
-# Free Tools Reference — CKAD v1.35 Labs
+# Free Tools Reference — CKAD v1.35 (2026) Labs
 
-Every tool listed here is **100% free** (open-source, freeware, or free tier with no time limit).
+Every tool listed here is **100% free**. No credit card, no time limit.
 
 Two categories:
+1. **Inside Killercoda** — pre-installed in the disposable Kubernetes VM.
+2. **External / Browser** — used outside the VM for reference, practice, or validation.
 
-1. **Inside Killercoda** — pre-installed in the throw-away Kubernetes VM, or installed during a lab. Nothing touches your own machine.
-2. **External / Standalone** — downloaded onto your own PC/laptop, or used in a browser. Useful when you're offline, on a school PC, or want a GUI.
+Primary lab environment (free, no signup required):
+https://killercoda.com/playgrounds/scenario/kubernetes
 
-Killercoda Kubernetes playground (free, no signup): https://killercoda.com/playgrounds/scenario/kubernetes
-
----
-
-## Section A — Tools inside the Killercoda Kubernetes VM
-
-### A1. Pre-installed (already in the playground)
-| Tool | Purpose | Used in Lab |
-|------|---------|-------------|
-| `kubectl` | Kubernetes CLI | every lab |
-| `docker` | Container build & run | 1, 2 |
-| `kubeadm` / `kubelet` | Single-node cluster bootstrap | already running |
-| Calico CNI | Pod networking + NetworkPolicy enforcement | 30 |
-| `containerd` | Container runtime under kubelet | implicit |
-| `crictl` | CRI debug tool | 19 |
-| `curl`, `wget`, `jq`, `vim`, `nano` | General CLI utilities | many |
-
-### A2. Installed during a specific lab
-| Tool | Install | Purpose | Lab |
-|------|---------|---------|-----|
-| Helm 3 | `curl -fsSL https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 \| bash` | Package manager for Kubernetes | 13 |
-| metrics-server | `kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml` | Provides CPU/memory metrics for `kubectl top` | 18 |
-| ingress-nginx | `kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/baremetal/deploy.yaml` | NGINX Ingress controller | 29 |
-| `openssl` | pre-installed | Generate self-signed TLS cert | 29 |
-| `kustomize` | Built into `kubectl -k` | Manifest overlays | 14 |
-
-### A3. Useful imperative kubectl shortcuts (exam-day)
-| Alias / var | Definition | Why |
-|-------------|-----------|-----|
-| `alias k=kubectl` | shorter | typing speed |
-| `export do="--dry-run=client -o yaml"` | YAML template | scaffold manifests instantly |
-| `export now="--force --grace-period 0"` | force-delete | unstuck pods |
-| `source <(kubectl completion bash)` | tab-complete | autocomplete resources |
-| `complete -F __start_kubectl k` | apply completion to `k` | autocomplete for alias |
+Alternative environments if Killercoda is unavailable:
+- **Play with Kubernetes**: https://labs.play-with-k8s.com
+- **Play with Docker**: https://labs.play-with-docker.com
+- **GitHub Codespaces** (free quota): https://github.com/features/codespaces
 
 ---
 
-## Section B — External / Standalone free tools
+## Section A — Tools Pre-Installed in Killercoda Kubernetes VM
 
-### B1. Local Kubernetes clusters (alternative to Killercoda)
-| Tool | Type | Link |
-|------|------|------|
-| Minikube | macOS / Linux / Windows | https://minikube.sigs.k8s.io |
-| kind (Kubernetes-in-Docker) | All OSes | https://kind.sigs.k8s.io |
-| k3s | Lightweight Linux distro | https://k3s.io |
-| k3d (k3s in Docker) | All OSes | https://k3d.io |
-| Docker Desktop Kubernetes | Bundled toggle | https://www.docker.com/products/docker-desktop |
-| MicroK8s | Snap-based, Ubuntu | https://microk8s.io |
-| Rancher Desktop | macOS / Windows / Linux | https://rancherdesktop.io |
+### A1. Core Kubernetes Tools
+| Tool | Purpose | Labs |
+|------|---------|------|
+| `kubectl` | All Kubernetes operations | All labs |
+| `kubectl kustomize` | Kustomize rendering (built into kubectl) | 14 |
+| `docker` | Build and run container images | 1, 2 |
+| `containerd` / `crictl` | Container runtime; ephemeral container debugging | 19 |
+| `helm` | Install via one-line script (Lab 13 Step 1) | 13 |
 
-### B2. Browser sandboxes
-| Service | What you get | Link |
-|---------|--------------|------|
-| **Killercoda Kubernetes Playground** ⭐ | Root + kubectl on a live cluster | https://killercoda.com/playgrounds/scenario/kubernetes |
-| Killer.sh CKAD simulator | Two free sessions with exam purchase | https://killer.sh/ckad |
-| Play with Kubernetes | 4-hour cluster in browser | https://labs.play-with-k8s.com |
-| KodeKloud Playgrounds | Free tier | https://kodekloud.com/playgrounds |
-| Instruqt CKAD tracks | Free hands-on tracks | https://instruqt.com |
+### A2. System and Network Tools
+| Tool | Install | Purpose | Labs |
+|------|---------|---------|------|
+| `curl` | pre-installed | Test HTTP Services and Ingress | 1, 5, 10, 27, 29 |
+| `wget` | pre-installed | Test Services from inside Pods | 11, 12, 27, 30 |
+| `nslookup` / `dig` | pre-installed | DNS resolution testing | 7, 15, 28 |
+| `openssl` | pre-installed | Generate self-signed TLS certs | 22, 29 |
+| `bash` / `sh` | pre-installed | Scripting and heredoc manifests | All labs |
 
-### B3. Container build / registry (Lab 1, 2)
-| Tool | Type | Link |
-|------|------|------|
-| Docker Engine | All OSes | https://docs.docker.com/engine |
-| Podman | Daemonless alternative | https://podman.io |
-| BuildKit / buildx | Multi-platform builds | https://github.com/moby/buildkit |
-| Skopeo | Copy images between registries | https://github.com/containers/skopeo |
-| Dive | Inspect image layers | https://github.com/wagoodman/dive |
-| Hadolint | Dockerfile linter | https://github.com/hadolint/hadolint |
-| Docker Hub (free tier) | Public image registry | https://hub.docker.com |
-| GitHub Container Registry | Free for public | https://ghcr.io |
-| Quay.io (free for public) | Public registry | https://quay.io |
+### A3. Text Manipulation
+| Tool | Purpose | Labs |
+|------|---------|------|
+| `sed` | In-place YAML edits | 3, 10 |
+| `grep` | Filter `describe` and `get` output | All labs |
+| `base64` | Encode/decode Secret values | 22 |
+| `jq` | JSON parsing (available via `apt install jq`) | 24 |
 
-### B4. kubectl tooling (every lab)
-| Tool | Type | Link |
-|------|------|------|
-| kubectl | All OSes | https://kubernetes.io/docs/tasks/tools/ |
-| kubectx + kubens | Context / namespace switcher | https://github.com/ahmetb/kubectx |
-| krew | kubectl plugin manager | https://krew.sigs.k8s.io |
-| kube-ps1 | Show context in prompt | https://github.com/jonmosco/kube-ps1 |
-| stern | Multi-pod log tail | https://github.com/stern/stern |
-| k9s | Terminal UI for clusters | https://k9scli.io |
-| kubeshark | API-aware traffic viewer | https://www.kubeshark.co |
+---
 
-### B5. Package and manifest management (Lab 13, 14)
-| Tool | Type | Link |
-|------|------|------|
-| Helm 3 | All OSes | https://helm.sh |
-| Kustomize | All OSes (also `kubectl -k`) | https://kustomize.io |
-| Helmfile | Declarative Helm | https://helmfile.readthedocs.io |
-| ArtifactHub | Search public Helm charts | https://artifacthub.io |
+## Section B — External / Browser Tools
 
-### B6. Probes / health (Lab 16)
-| Tool | Type | Link |
-|------|------|------|
-| `curl` | CLI | bundled |
-| `wget` | CLI | bundled |
-| `grpc_health_probe` | gRPC liveness probe | https://github.com/grpc-ecosystem/grpc-health-probe |
+### B1. Exam Practice
+| Tool | Type | Purpose |
+|------|------|---------|
+| **killer.sh** ⭐ | Web (paid add-on) | Official CKAD mock exam — closest to real exam environment |
+| **Killercoda CKAD scenarios** | Web (free) | Curated CKAD practice scenarios |
+| **KodeKloud CKAD labs** | Web (free tier) | Browser-based Kubernetes practice |
 
-### B7. Logging / observability (Lab 17, 18, 19)
-| Tool | Type | Link |
-|------|------|------|
-| metrics-server | Cluster add-on | https://github.com/kubernetes-sigs/metrics-server |
-| `kubectl logs` / `kubectl events` | Built-in | — |
-| stern | Multi-pod log tail | https://github.com/stern/stern |
-| kail | kubectl log forwarder | https://github.com/boz/kail |
-| Loki + Grafana | Self-hosted logs | https://grafana.com/oss/loki/ |
-| Prometheus + Grafana | Self-hosted metrics | https://prometheus.io |
-| Lens IDE (free) | Cluster GUI | https://k8slens.dev |
-| Octant (archived but works) | Web cluster GUI | https://github.com/vmware-archive/octant |
+Links:
+- killer.sh: https://killer.sh
+- Killercoda CKAD: https://killercoda.com/killer-shell-ckad
+- KodeKloud: https://kodekloud.com
 
-### B8. Debugging (Lab 19)
-| Tool | Type | Link |
-|------|------|------|
-| `kubectl debug` | Ephemeral debug containers | built-in |
-| `kubectl describe` / `kubectl events` | Built-in | — |
-| crictl | CRI debug tool | https://github.com/kubernetes-sigs/cri-tools |
-| nicolaka/netshoot | Network debug image | https://github.com/nicolaka/netshoot |
-| busybox / alpine | Disposable debug shells | Docker Hub |
+### B2. Official Documentation (Allowed During CKAD Exam)
+| Resource | URL |
+|----------|-----|
+| **Kubernetes docs** ⭐ | https://kubernetes.io/docs/ |
+| **kubectl cheat sheet** ⭐ | https://kubernetes.io/docs/reference/kubectl/cheatsheet/ |
+| **API reference (v1.35)** | https://kubernetes.io/docs/reference/kubernetes-api/ |
+| **kubectl generated reference** | https://kubernetes.io/docs/reference/kubectl/generated/ |
+| **Helm docs** | https://helm.sh/docs/ |
 
-### B9. Security / RBAC (Lab 22, 23, 24, 25)
-| Tool | Type | Link |
-|------|------|------|
-| `kubectl auth can-i` | Built-in RBAC simulator | — |
-| `rakkess` | Resource access matrix | https://github.com/corneliusweig/rakkess |
-| `kubectl-who-can` | Reverse RBAC lookup | https://github.com/aquasecurity/kubectl-who-can |
-| `kube-bench` | CIS benchmark scanner | https://github.com/aquasecurity/kube-bench |
-| `trivy` | Image + cluster vulnerability scanner | https://github.com/aquasecurity/trivy |
-| Falco | Runtime security | https://falco.org |
-| OPA Gatekeeper | Policy controller | https://open-policy-agent.github.io/gatekeeper/ |
-| Kyverno | Policy controller | https://kyverno.io |
-| `kubeseal` (Sealed Secrets) | Encrypt Secrets into Git | https://sealed-secrets.netlify.app |
-| `sops` | Secret encryption | https://github.com/getsops/sops |
+### B3. Image Registries
+| Registry | Purpose |
+|----------|---------|
+| **DockerHub** — https://hub.docker.com | Find and inspect base images |
+| **Artifact Hub** — https://artifacthub.io | Search Helm charts |
+| **Google Distroless** — https://github.com/GoogleContainerTools/distroless | Minimal runtime base images |
+| **Bitnami Charts** — https://github.com/bitnami/charts | Production Helm charts |
 
-### B10. Networking & Ingress (Lab 27, 28, 29, 30)
-| Tool | Type | Link |
-|------|------|------|
-| ingress-nginx | Ingress controller | https://kubernetes.github.io/ingress-nginx/ |
-| Traefik | Ingress controller | https://traefik.io |
-| HAProxy Ingress | Ingress controller | https://haproxy-ingress.github.io |
-| MetalLB | LoadBalancer for bare-metal | https://metallb.universe.tf |
-| Cilium | CNI + NetworkPolicy + L7 | https://cilium.io |
-| Calico | CNI + NetworkPolicy | https://www.tigera.io/project-calico/ |
-| `kubectl port-forward` | Built-in | — |
+### B4. Networking and Policy Tools
+| Tool | Type | Purpose |
+|------|------|---------|
+| **NetworkPolicy Editor** | Web | Visual NetworkPolicy builder | 
+| **SSL Labs** | Web | Test TLS configuration |
+| **CoreDNS docs** | Web | DNS configuration reference |
 
-### B11. YAML / manifest authoring
-| Tool | Type | Link |
-|------|------|------|
-| VS Code + Kubernetes extension | Cross-platform | https://marketplace.visualstudio.com/items?itemName=ms-kubernetes-tools.vscode-kubernetes-tools |
-| YAMLLint | Web / CLI | https://www.yamllint.com |
-| `kubeval` | Manifest schema validation | https://www.kubeval.com |
-| `kubeconform` | Faster kubeval replacement | https://github.com/yannh/kubeconform |
-| `kube-score` | Best-practice linter | https://github.com/zegl/kube-score |
-| Datree | Policy-as-code checks | https://www.datree.io |
+Links:
+- NetworkPolicy Editor: https://editor.networkpolicy.io
+- SSL Labs: https://www.ssllabs.com/ssltest
+- CoreDNS: https://coredns.io/docs/
 
-### B12. Practice & study (allowed during real CKAD exam)
-| Tool | Type | Link |
-|------|------|------|
-| Kubernetes docs | Web | https://kubernetes.io/docs |
-| Helm docs | Web | https://helm.sh/docs |
-| kubectl cheatsheet | Web | https://kubernetes.io/docs/reference/kubectl/cheatsheet/ |
-| CKAD curriculum v1.35 PDF | PDF | https://github.com/cncf/curriculum |
-| CKAD exam prep repo (this course's answer key) | GitHub | https://github.com/ChathurangaVKD/ckad-exam-prep |
-| Killer.sh CKAD simulator | Web | https://killer.sh/ckad |
+### B5. YAML and Kubernetes Utilities
+| Tool | Type | Purpose |
+|------|------|---------|
+| **YAML Lint** | Web | Validate YAML syntax before applying |
+| **Lens Desktop** | App | Visual Kubernetes cluster explorer |
+| **k9s** | CLI | Terminal-based cluster UI |
+| **crontab.guru** | Web | Validate cron schedule expressions |
+
+Links:
+- YAML Lint: https://www.yamllint.com
+- Lens: https://k8slens.dev
+- k9s: https://k9scli.io
+- crontab.guru: https://crontab.guru
 
 ---
 
 ## Lab → Primary Tool Quick Map
 
-| Lab | Headline tool(s) |
-|-----|------------------|
-| 1 | `docker build`, `docker run` |
-| 2 | `docker build` multi-stage |
-| 3 | `kubectl run`, `kubectl get pod` |
-| 4 | `kubectl create job`, `Job` resource |
-| 5 | `kubectl create cronjob`, `CronJob` resource |
-| 6 | Pod with multiple `containers:` |
-| 7 | `initContainers:` |
-| 8 | `emptyDir`, `hostPath` volumes |
-| 9 | `kubectl create deployment` |
-| 10 | `kubectl rollout` |
-| 11 | Two Deployments + Service selector swap |
-| 12 | Weighted Deployments + shared Service |
-| 13 | `helm install`, `helm upgrade` |
-| 14 | `kubectl apply -k`, overlays |
-| 15 | `DaemonSet`, `StatefulSet` |
-| 16 | `livenessProbe`, `readinessProbe`, `startupProbe` |
-| 17 | `kubectl logs`, multi-container `-c` |
-| 18 | `metrics-server`, `kubectl top` |
-| 19 | `kubectl describe`, `kubectl events`, `kubectl debug` |
-| 20 | `kubectl explain`, `kubectl api-resources` |
-| 21 | `kubectl create configmap`, `envFrom`, volume mount |
-| 22 | `kubectl create secret`, `envFrom`, volume mount |
-| 23 | `securityContext`, `runAsUser`, `runAsNonRoot` |
-| 24 | `ServiceAccount`, automount token |
-| 25 | `Role`, `RoleBinding`, `kubectl auth can-i` |
-| 26 | `ResourceQuota`, `LimitRange` |
-| 27 | `Service` ClusterIP / NodePort / LoadBalancer |
-| 28 | CoreDNS, FQDN `svc.ns.svc.cluster.local` |
-| 29 | `Ingress` with `tls:` block |
-| 30 | `NetworkPolicy` ingress / egress |
+| Lab | Topic | Key Commands |
+|-----|-------|-------------|
+| 1 | Container images | `docker build`, `docker run`, `docker history` |
+| 2 | Multi-stage builds | `docker build -f`, `COPY --from=` |
+| 3 | Pods | `kubectl run`, `kubectl apply`, `--dry-run=client -o yaml` |
+| 4 | Jobs | `kubectl create job`, `completions`, `parallelism` |
+| 5 | CronJobs | `kubectl create cronjob`, `kubectl create job --from=cronjob/` |
+| 6 | Sidecar / Multi-container | `kubectl logs -c`, `kubectl exec -c` |
+| 7 | Init containers | `kubectl get pod` (watch Init:N/M) |
+| 8 | Volumes | `emptyDir`, `hostPath`, `volumeMounts` |
+| 9 | Deployments | `kubectl create deployment`, `kubectl scale`, `kubectl set env` |
+| 10 | Rolling updates | `kubectl set image`, `kubectl rollout`, `kubectl rollout undo` |
+| 11 | Blue/Green | `kubectl patch service` (selector flip) |
+| 12 | Canary | `kubectl scale` (replica ratio) |
+| 13 | Helm | `helm install`, `helm upgrade`, `helm rollback` |
+| 14 | Kustomize | `kubectl apply -k`, `kubectl kustomize` |
+| 15 | DaemonSet / StatefulSet | `kubectl rollout status sts/` |
+| 16 | Probes | `livenessProbe`, `readinessProbe`, `startupProbe` |
+| 17 | Logging | `kubectl logs -f`, `--previous`, `--all-containers` |
+| 18 | Metrics | `kubectl top node`, `kubectl top pod --sort-by=cpu` |
+| 19 | Debugging | `kubectl describe`, `kubectl get events`, `kubectl debug` |
+| 20 | API deprecations | `kubectl api-resources`, `kubectl explain` |
+| 21 | ConfigMaps | `configMapKeyRef`, `envFrom`, volume mount |
+| 22 | Secrets | `secretRef`, `defaultMode: 0400`, `base64 -d` |
+| 23 | SecurityContext | `runAsUser`, `readOnlyRootFilesystem`, `capabilities.drop` |
+| 24 | ServiceAccounts | `kubectl create token`, `automountServiceAccountToken` |
+| 25 | RBAC | `kubectl auth can-i --as=`, Role, ClusterRole |
+| 26 | Quota / LimitRange | `kubectl describe quota`, `hard:`, `defaultRequest:` |
+| 27 | Services | `kubectl expose`, ClusterIP, NodePort, LoadBalancer |
+| 28 | Service DNS | FQDN format, `ndots:5`, headless Service |
+| 29 | Ingress + TLS | `networking.k8s.io/v1`, `pathType: Prefix`, TLS Secret |
+| 30 | NetworkPolicy | default-deny, `podSelector`, `namespaceSelector` |
 
 ---
 
-All tools above are free of charge. The Killercoda Kubernetes VM is also free and disposable, so you can run every lab without spending or installing anything on your own machine.
+## Exam Day Setup (Run This First)
+
+```bash
+alias k=kubectl
+export do="--dry-run=client -o yaml"
+source <(kubectl completion bash)
+complete -o default -F __start_kubectl k
+```
+
+These four lines save significant time in the real exam. Set them in the first 30 seconds.

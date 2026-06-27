@@ -1,9 +1,13 @@
-# Lab 18 — kubectl top and Metrics
+# Lab 18 — kubectl top and Metrics Server
 
-`kubectl top` shows real-time CPU and memory for nodes and Pods, but it needs the **metrics-server** add-on. In this lab you will install metrics-server, watch metrics for a synthetic load Pod, and sort Pods by resource usage.
+`kubectl top` shows real-time CPU and memory for nodes and Pods. It requires the **metrics-server** add-on. CKAD 2026 tests installation of metrics-server, reading node and Pod metrics, and sorting by resource usage — a common warm-up question in the exam.
 
-Run on the Killercoda Kubernetes Playground:
-https://killercoda.com/playgrounds/scenario/kubernetes
+Run on https://killercoda.com/playgrounds/scenario/kubernetes
+
+**Required software (free):**
+- `kubectl` (pre-installed on Killercoda)
+- `metrics-server` (installed in Step 1)
+- `busybox` image (pre-pulled on Killercoda)
 
 ---
 
@@ -11,21 +15,21 @@ https://killercoda.com/playgrounds/scenario/kubernetes
 
 ```bash
 alias k=kubectl
-k apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
 ```
 
-Killercoda uses self-signed kubelet certs, so patch the Deployment to skip TLS verification:
+Killercoda uses self-signed kubelet certificates, so patch the Deployment to skip TLS verification:
 
 ```bash
-k patch -n kube-system deployment metrics-server --type=json -p='
+kubectl patch -n kube-system deployment metrics-server --type=json -p='
 [{"op":"add","path":"/spec/template/spec/containers/0/args/-","value":"--kubelet-insecure-tls"}]'
-k -n kube-system rollout status deployment/metrics-server
+kubectl -n kube-system rollout status deployment/metrics-server
 ```
 
-Wait until the API is healthy:
+Wait for the API to become available:
 
 ```bash
-until k top node 2>/dev/null; do echo waiting…; sleep 5; done
+until kubectl top node 2>/dev/null; do echo "waiting for metrics..."; sleep 5; done
 ```
 
 ---
@@ -36,9 +40,11 @@ until k top node 2>/dev/null; do echo waiting…; sleep 5; done
 k top node
 ```
 
+Shows CPU (cores and %) and memory (bytes and %) per node.
+
 ---
 
-## Step 3 — Generate load
+## Step 3 — Generate CPU load
 
 ```bash
 k run cpu-burner --image=busybox -- sh -c 'while true; do :; done'
@@ -46,32 +52,53 @@ k run idle --image=busybox -- sh -c 'sleep 3600'
 sleep 30
 ```
 
+Wait 30 seconds for metrics to scrape the new Pods.
+
 ---
 
-## Step 4 — Top Pods, sorted by CPU
+## Step 4 — Top Pods, sorted by CPU and memory
 
 ```bash
 k top pod
 k top pod --sort-by=cpu
 k top pod --sort-by=memory
-k top pod -A --sort-by=cpu | head
+k top pod -A --sort-by=cpu | head -10
 ```
 
-The `cpu-burner` Pod should be at the top.
+`cpu-burner` should appear at the top of the CPU sort. `-A` covers all namespaces.
 
 ---
 
-## Step 5 — Clean up
+## Step 5 — Top a specific namespace
 
 ```bash
-k delete pod cpu-burner idle --force --grace-period 0
+k top pod -n kube-system --sort-by=memory
 ```
 
-You can leave metrics-server installed for later labs.
+---
+
+## Step 6 — Clean up
+
+```bash
+k delete pod cpu-burner idle --force --grace-period=0
+```
+
+Leave metrics-server installed — it is used in Lab 26 (ResourceQuota).
+
+---
+
+## Free online tools
+
+- **Metrics Server repo**: https://github.com/kubernetes-sigs/metrics-server
+- **Resource management docs**: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+- **killer.sh** — CKAD mock exam: https://killer.sh
+- **Kubernetes docs** (allowed in CKAD exam): https://kubernetes.io/docs/
 
 ---
 
 ## What you learned
-- Why `kubectl top` needs metrics-server.
-- `--kubelet-insecure-tls` workaround for self-signed kubelet certs.
-- `kubectl top node`, `kubectl top pod --sort-by=cpu`.
+
+- `kubectl top` requires metrics-server to be installed and running.
+- `--kubelet-insecure-tls` is needed on Killercoda due to self-signed certs.
+- `kubectl top node` and `kubectl top pod --sort-by=cpu` are exam-day queries.
+- `-A` flag covers all namespaces; combine with `| head` to manage output.

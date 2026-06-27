@@ -1,13 +1,17 @@
 # Lab 2 — Multi-Stage Dockerfile
 
-In this lab you will shrink an image by separating the **build** stage from the **runtime** stage. Multi-stage builds are the standard CKAD pattern for producing small, secure images. You will see a roughly 10× reduction in size by discarding compilers and source code.
+Separate the build stage from the runtime stage to produce images that are 10× smaller and contain no compiler toolchain. Multi-stage builds are a CKAD 2026 exam staple — you must be able to write one from scratch and explain why it shrinks the image.
 
-Run on the Killercoda Kubernetes Playground:
-https://killercoda.com/playgrounds/scenario/kubernetes
+Run on https://killercoda.com/playgrounds/scenario/kubernetes
+
+**Required software (free):**
+- `docker` (pre-installed on Killercoda)
+- `golang:1.22` builder image (pulled automatically)
+- `gcr.io/distroless/static-debian12` runtime image (pulled automatically)
 
 ---
 
-## Step 1 — Source code
+## Step 1 — Create the Go source file
 
 ```bash
 mkdir -p ~/lab02 && cd ~/lab02
@@ -16,7 +20,7 @@ cat > main.go <<'EOF'
 package main
 import ("fmt"; "net/http")
 func main() {
-    http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request){
+    http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
         fmt.Fprintln(w, "hello from multi-stage build")
     })
     http.ListenAndServe(":8080", nil)
@@ -26,7 +30,7 @@ EOF
 
 ---
 
-## Step 2 — Single-stage Dockerfile (baseline)
+## Step 2 — Single-stage baseline (large image)
 
 ```bash
 cat > Dockerfile.single <<'EOF'
@@ -39,19 +43,21 @@ EOF
 docker build -f Dockerfile.single -t demo:single .
 ```
 
+This image ships the entire Go toolchain (~800 MB) just to run a 6 MB binary.
+
 ---
 
-## Step 3 — Multi-stage Dockerfile
+## Step 3 — Multi-stage Dockerfile (small image)
 
 ```bash
 cat > Dockerfile.multi <<'EOF'
-# --- build stage ---
+# Stage 1: compile
 FROM golang:1.22 AS builder
 WORKDIR /src
 COPY main.go .
 RUN go mod init demo && CGO_ENABLED=0 go build -o /out/app main.go
 
-# --- runtime stage ---
+# Stage 2: runtime only
 FROM gcr.io/distroless/static-debian12
 COPY --from=builder /out/app /app
 EXPOSE 8080
@@ -60,21 +66,27 @@ EOF
 docker build -f Dockerfile.multi -t demo:multi .
 ```
 
-Key idea: `COPY --from=builder` pulls only the compiled binary into a tiny final image. The Go toolchain stays behind.
+`COPY --from=builder` pulls only the compiled binary into the final image. The entire Go toolchain stays in the builder stage and is discarded.
 
 ---
 
-## Step 4 — Compare sizes
+## Step 4 — Compare image sizes
 
 ```bash
 docker images | grep demo
 ```
 
-You should see `demo:single` around **800 MB** and `demo:multi` around **8–10 MB**.
+Expected output:
+```
+demo   single   ...   ~800MB
+demo   multi    ...   ~8MB
+```
+
+The `distroless` runtime has no shell, no package manager, no attack surface.
 
 ---
 
-## Step 5 — Run the small image
+## Step 5 — Run the small image and test
 
 ```bash
 docker run -d --name multi -p 8080:8080 demo:multi
@@ -82,9 +94,30 @@ curl http://localhost:8080
 docker rm -f multi
 ```
 
+Expected response: `hello from multi-stage build`
+
+---
+
+## Step 6 — Clean up
+
+```bash
+docker rmi demo:single demo:multi
+```
+
+---
+
+## Free online tools
+
+- **Distroless images** — Google's minimal runtime containers: https://github.com/GoogleContainerTools/distroless
+- **Dive** — visualise image layers: https://github.com/wagoodman/dive
+- **DockerHub** — browse official base images: https://hub.docker.com
+- **Kubernetes docs** (allowed in CKAD exam): https://kubernetes.io/docs/
+
 ---
 
 ## What you learned
-- Why multi-stage builds shrink images dramatically.
-- How `COPY --from=<stage>` selects a previous stage.
-- Why distroless / scratch images are preferred for runtime stages.
+
+- Multi-stage builds use `AS <name>` on `FROM` and `COPY --from=<name>` to transfer artifacts.
+- Only the **last** `FROM` stage ends up in the final image — earlier stages are build-only.
+- `CGO_ENABLED=0` produces a statically linked binary that runs in distroless/scratch.
+- Smaller images = faster pulls, smaller attack surface, lower scan findings.

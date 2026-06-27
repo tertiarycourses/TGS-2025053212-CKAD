@@ -1,13 +1,16 @@
 # Lab 14 — Kustomize Overlays
 
-Kustomize lets you reuse a **base** set of manifests and apply environment-specific **overlays** — without templating. It is built into `kubectl` (`-k`). In this lab you will build a base, a `dev` overlay, and a `prod` overlay.
+Kustomize lets you reuse a single **base** set of manifests and apply environment-specific **overlays** without templating. It is built into `kubectl` (`-k` flag) — no installation required. CKAD 2026 tests `namePrefix`, `commonLabels`, `images`, and strategic-merge `patches`.
 
-Run on the Killercoda Kubernetes Playground:
-https://killercoda.com/playgrounds/scenario/kubernetes
+Run on https://killercoda.com/playgrounds/scenario/kubernetes
+
+**Required software (free):**
+- `kubectl` (pre-installed on Killercoda — includes kustomize)
+- `nginx:1.25`, `nginx:1.26` images (pulled automatically)
 
 ---
 
-## Step 1 — Project layout
+## Step 1 — Create the project layout
 
 ```bash
 mkdir -p ~/lab14/{base,overlays/dev,overlays/prod}
@@ -16,18 +19,23 @@ cd ~/lab14
 
 ---
 
-## Step 2 — Base manifests
+## Step 2 — Base manifests (shared by all environments)
 
 ```bash
 cat > base/deployment.yaml <<'EOF'
 apiVersion: apps/v1
 kind: Deployment
-metadata: { name: web }
+metadata:
+  name: web
 spec:
   replicas: 1
-  selector: { matchLabels: { app: web } }
+  selector:
+    matchLabels:
+      app: web
   template:
-    metadata: { labels: { app: web } }
+    metadata:
+      labels:
+        app: web
     spec:
       containers:
       - name: web
@@ -37,10 +45,14 @@ EOF
 cat > base/service.yaml <<'EOF'
 apiVersion: v1
 kind: Service
-metadata: { name: web }
+metadata:
+  name: web
 spec:
-  selector: { app: web }
-  ports: [{ port: 80, targetPort: 80 }]
+  selector:
+    app: web
+  ports:
+  - port: 80
+    targetPort: 80
 EOF
 
 cat > base/kustomization.yaml <<'EOF'
@@ -66,13 +78,14 @@ EOF
 
 ---
 
-## Step 4 — Prod overlay (5 replicas + image bump)
+## Step 4 — Prod overlay (5 replicas, image bump to 1.26)
 
 ```bash
 cat > overlays/prod/replica-patch.yaml <<'EOF'
 apiVersion: apps/v1
 kind: Deployment
-metadata: { name: web }
+metadata:
+  name: web
 spec:
   replicas: 5
 EOF
@@ -93,12 +106,14 @@ EOF
 
 ---
 
-## Step 5 — Preview each overlay
+## Step 5 — Preview without applying
 
 ```bash
-kubectl kustomize overlays/dev | head -30
-kubectl kustomize overlays/prod | head -30
+kubectl kustomize overlays/dev | grep -E "name:|replicas:|image:"
+kubectl kustomize overlays/prod | grep -E "name:|replicas:|image:"
 ```
+
+Dev: name `dev-web`, 1 replica, `nginx:1.25`. Prod: name `prod-web`, 5 replicas, `nginx:1.26`.
 
 ---
 
@@ -111,7 +126,7 @@ kubectl get deploy,svc -l env=dev
 
 ---
 
-## Step 7 — Switch to prod
+## Step 7 — Apply the prod overlay and verify image
 
 ```bash
 kubectl apply -k overlays/prod
@@ -130,7 +145,18 @@ kubectl delete -k overlays/prod
 
 ---
 
+## Free online tools
+
+- **Kustomize docs**: https://kubernetes.io/docs/tasks/manage-kubernetes-objects/kustomization/
+- **Kustomize reference site**: https://kustomize.io
+- **killer.sh** — CKAD mock exam: https://killer.sh
+- **Kubernetes docs** (allowed in CKAD exam): https://kubernetes.io/docs/
+
+---
+
 ## What you learned
-- Base + overlays = reuse without templating.
-- `namePrefix`, `commonLabels`, `images`, and strategic-merge `patches`.
-- `kubectl apply -k` and `kubectl kustomize` are built into kubectl.
+
+- Base + overlays = reuse without Go templating.
+- `namePrefix` and `commonLabels` are applied to every resource in the overlay.
+- `images` block overrides image tags without editing base files.
+- `kubectl apply -k` and `kubectl kustomize` are built into kubectl — no extra binary.

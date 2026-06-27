@@ -1,81 +1,123 @@
-# CKAD v1.35 — Lab Index
+# CKAD v1.35 Lab Index — 2026 Edition
 
-All labs run on the free Killercoda Kubernetes Playground:
-**https://killercoda.com/playgrounds/scenario/kubernetes**
+Hands-on labs for the **Certified Kubernetes Application Developer (CKAD)** exam. All 30 labs run on the free Killercoda Kubernetes Playground — no local installation required.
 
-`kubectl`, `docker` and a single-node Kubernetes cluster are pre-installed inside the throw-away VM. Helm and Kustomize are installed in the labs that need them. Nothing has to be installed on your own machine.
+**Lab environment:** https://killercoda.com/playgrounds/scenario/kubernetes  
+**Alternative:** https://labs.play-with-k8s.com
+
+**First thing to run on every session:**
+```bash
+alias k=kubectl
+export do="--dry-run=client -o yaml"
+source <(kubectl completion bash)
+complete -o default -F __start_kubectl k
+```
 
 ---
 
 ## Domain 1 — Application Design and Build (20%)
 
-| # | Lab | Free software needed |
-|---|-----|----------------------|
-| 1 | [Build a Container Image with Docker](lab-01-build-container-image.md) | `docker` (pre-installed) |
-| 2 | [Multi-Stage Dockerfile](lab-02-multistage-dockerfile.md) | `docker` (pre-installed) |
-| 3 | [Create and Manage Pods](lab-03-create-pods.md) | `kubectl` (pre-installed) |
-| 4 | [Jobs (Run-to-Completion)](lab-04-jobs.md) | `kubectl` (pre-installed) |
-| 5 | [CronJobs (Scheduled Workloads)](lab-05-cronjobs.md) | `kubectl` (pre-installed) |
-| 6 | [Multi-Container Pods (Sidecar Pattern)](lab-06-sidecar-pod.md) | `kubectl` (pre-installed) |
-| 7 | [Init Containers](lab-07-init-containers.md) | `kubectl` (pre-installed) |
-| 8 | [Volumes (emptyDir and hostPath)](lab-08-volumes.md) | `kubectl` (pre-installed) |
-
-## Domain 2 — Application Deployment (20%)
-
-| # | Lab | Free software needed |
-|---|-----|----------------------|
-| 9 | [Deployments and ReplicaSets](lab-09-deployments.md) | `kubectl` (pre-installed) |
-| 10 | [Rolling Updates and Rollback](lab-10-rolling-update.md) | `kubectl` (pre-installed) |
-| 11 | [Blue/Green Deployment](lab-11-blue-green.md) | `kubectl` (pre-installed) |
-| 12 | [Canary Deployment](lab-12-canary.md) | `kubectl` (pre-installed) |
-| 13 | [Helm Install and Upgrade](lab-13-helm.md) | `helm` (curl install script in lab) |
-| 14 | [Kustomize Overlays](lab-14-kustomize.md) | `kubectl` built-in `-k` |
-| 15 | [DaemonSets and StatefulSets](lab-15-daemonset-statefulset.md) | `kubectl` (pre-installed) |
-
-## Domain 3 — Application Observability and Maintenance (15%)
-
-| # | Lab | Free software needed |
-|---|-----|----------------------|
-| 16 | [Liveness, Readiness and Startup Probes](lab-16-probes.md) | `kubectl` (pre-installed) |
-| 17 | [Container Logging](lab-17-logging.md) | `kubectl` (pre-installed) |
-| 18 | [kubectl top and Metrics](lab-18-metrics.md) | metrics-server (deployed in lab) |
-| 19 | [Debugging Pods and Events](lab-19-debug.md) | `kubectl` (pre-installed) |
-| 20 | [API Deprecations and kubectl explain](lab-20-api-deprecations.md) | `kubectl` (pre-installed) |
-
-## Domain 4 — Application Environment, Configuration and Security (25%)
-
-| # | Lab | Free software needed |
-|---|-----|----------------------|
-| 21 | [ConfigMaps (env and volume)](lab-21-configmaps.md) | `kubectl` (pre-installed) |
-| 22 | [Secrets](lab-22-secrets.md) | `kubectl` (pre-installed) |
-| 23 | [SecurityContext](lab-23-securitycontext.md) | `kubectl` (pre-installed) |
-| 24 | [ServiceAccounts](lab-24-serviceaccounts.md) | `kubectl` (pre-installed) |
-| 25 | [RBAC (Role and RoleBinding)](lab-25-rbac.md) | `kubectl` (pre-installed) |
-| 26 | [ResourceQuota and LimitRange](lab-26-quota-limitrange.md) | `kubectl` (pre-installed) |
-
-## Domain 5 — Services and Networking (20%)
-
-| # | Lab | Free software needed |
-|---|-----|----------------------|
-| 27 | [Services (ClusterIP, NodePort, LoadBalancer)](lab-27-services.md) | `kubectl` (pre-installed) |
-| 28 | [Service DNS](lab-28-service-dns.md) | `kubectl` (pre-installed) |
-| 29 | [Ingress with TLS](lab-29-ingress-tls.md) | ingress-nginx (deployed in lab) |
-| 30 | [NetworkPolicy](lab-30-networkpolicy.md) | Calico (already on Killercoda) |
+| Lab | Title | Key Skill |
+|-----|-------|-----------|
+| [Lab 01](lab-01-build-container-image.md) | Build a Container Image | Dockerfile, `docker build`, image layers |
+| [Lab 02](lab-02-multistage-dockerfile.md) | Multi-Stage Dockerfile | `COPY --from=`, distroless, image size reduction |
+| [Lab 03](lab-03-create-pods.md) | Create and Manage Pods | `kubectl run`, `--dry-run=client -o yaml`, `--restart=Never` |
+| [Lab 04](lab-04-jobs.md) | Jobs | `completions`, `parallelism`, `backoffLimit`, `activeDeadlineSeconds` |
+| [Lab 05](lab-05-cronjobs.md) | CronJobs | `concurrencyPolicy`, `timeZone`, manual trigger |
+| [Lab 06](lab-06-sidecar-pod.md) | Sidecar / Multi-Container Pods | `emptyDir` sharing, native sidecar (k8s 1.29+) |
+| [Lab 07](lab-07-init-containers.md) | Init Containers | Ordered startup, seed volumes, wait for services |
+| [Lab 08](lab-08-volumes.md) | Volumes | `emptyDir`, `emptyDir.medium: Memory`, `hostPath` |
 
 ---
 
-## Suggested order
+## Domain 2 — Application Deployment (20%)
 
-Work through Domain 1 → 2 → 3 → 4 → 5 in numeric order. Each lab is self-contained. Reset the Killercoda playground between labs that change cluster-scoped objects (RBAC, CRDs, NetworkPolicies, ingress controllers) to avoid carry-over.
+| Lab | Title | Key Skill |
+|-----|-------|-----------|
+| [Lab 09](lab-09-deployments.md) | Deployments and ReplicaSets | Deployment → RS → Pod chain, `kubectl scale` |
+| [Lab 10](lab-10-rolling-update.md) | Rolling Updates and Rollback | `maxSurge`, `maxUnavailable`, `kubectl rollout undo` |
+| [Lab 11](lab-11-blue-green.md) | Blue/Green Deployment | Service selector flip, atomic cutover |
+| [Lab 12](lab-12-canary.md) | Canary Deployment | Replica ratio traffic split, gradual promotion |
+| [Lab 13](lab-13-helm.md) | Helm | `helm install`, `upgrade`, `rollback`, `--reuse-values` |
+| [Lab 14](lab-14-kustomize.md) | Kustomize Overlays | `namePrefix`, `commonLabels`, `images`, `patches` |
+| [Lab 15](lab-15-daemonset-statefulset.md) | DaemonSet and StatefulSet | Per-node scheduling, stable Pod DNS, ordered scale |
 
-## Exam-day kubectl aliases
+---
 
-Set these once at the top of every lab to mirror real exam conditions:
+## Domain 3 — Application Observability and Maintenance (15%)
 
+| Lab | Title | Key Skill |
+|-----|-------|-----------|
+| [Lab 16](lab-16-probes.md) | Liveness, Readiness, Startup Probes | `httpGet`, `tcpSocket`, `exec`, `startupProbe` |
+| [Lab 17](lab-17-logging.md) | Container Logging | `kubectl logs -f`, `--previous`, `-c`, `-l selector` |
+| [Lab 18](lab-18-metrics.md) | Metrics Server and kubectl top | `kubectl top node/pod --sort-by=cpu` |
+| [Lab 19](lab-19-debug.md) | Debugging Pods and Events | `ImagePullBackOff`, `CrashLoopBackOff`, `OOMKilled`, `kubectl debug` |
+| [Lab 20](lab-20-api-deprecations.md) | API Deprecations and kubectl explain | `kubectl api-resources`, `kubectl explain --recursive` |
+
+---
+
+## Domain 4 — Application Environment, Configuration, and Security (25%)
+
+| Lab | Title | Key Skill |
+|-----|-------|-----------|
+| [Lab 21](lab-21-configmaps.md) | ConfigMaps | `--from-literal`, `envFrom`, volume mount, live update |
+| [Lab 22](lab-22-secrets.md) | Secrets | `generic`, `tls`, `docker-registry`, `defaultMode: 0400` |
+| [Lab 23](lab-23-securitycontext.md) | SecurityContext | `runAsNonRoot`, `readOnlyRootFilesystem`, `capabilities.drop` |
+| [Lab 24](lab-24-serviceaccounts.md) | ServiceAccounts | `kubectl create token`, `automountServiceAccountToken: false` |
+| [Lab 25](lab-25-rbac.md) | RBAC | Role, ClusterRole, `kubectl auth can-i --as=` |
+| [Lab 26](lab-26-quota-limitrange.md) | ResourceQuota and LimitRange | Aggregate namespace quotas, per-container defaults |
+
+---
+
+## Domain 5 — Services and Networking (20%)
+
+| Lab | Title | Key Skill |
+|-----|-------|-----------|
+| [Lab 27](lab-27-services.md) | Services | ClusterIP, NodePort, LoadBalancer, endpoint debugging |
+| [Lab 28](lab-28-service-dns.md) | Service DNS | FQDN, cross-namespace, `ndots:5`, headless Service |
+| [Lab 29](lab-29-ingress-tls.md) | Ingress with TLS | `networking.k8s.io/v1`, TLS Secret, path routing |
+| [Lab 30](lab-30-networkpolicy.md) | NetworkPolicy | Default-deny, `podSelector`, `namespaceSelector`, egress DNS |
+
+---
+
+## Exam Quick Reference
+
+### API Versions (Kubernetes v1.35)
+| Resource | apiVersion |
+|----------|------------|
+| Pod, Service, ConfigMap, Secret, Namespace, ServiceAccount, ResourceQuota, LimitRange | `v1` |
+| Deployment, StatefulSet, DaemonSet, ReplicaSet | `apps/v1` |
+| Job, CronJob | `batch/v1` |
+| Ingress, NetworkPolicy | `networking.k8s.io/v1` |
+| Role, RoleBinding, ClusterRole, ClusterRoleBinding | `rbac.authorization.k8s.io/v1` |
+| HorizontalPodAutoscaler | `autoscaling/v2` |
+| PodDisruptionBudget | `policy/v1` |
+
+### Most-Used kubectl Commands
 ```bash
-alias k=kubectl
-export do="--dry-run=client -o yaml"
-export now="--force --grace-period 0"
-source <(kubectl completion bash)
-complete -F __start_kubectl k
+# Generate YAML scaffold
+kubectl run <name> --image=<img> --dry-run=client -o yaml > pod.yaml
+kubectl create deployment <name> --image=<img> --dry-run=client -o yaml > deploy.yaml
+
+# Apply and delete
+kubectl apply -f file.yaml
+kubectl delete pod <name> --force --grace-period=0
+
+# Inspect
+kubectl describe pod <name>
+kubectl get events --sort-by=.lastTimestamp
+kubectl logs <pod> -c <container> --previous
+
+# RBAC validation
+kubectl auth can-i <verb> <resource> --as=system:serviceaccount:<ns>:<sa>
+
+# Rollout
+kubectl rollout status deployment/<name>
+kubectl rollout undo deployment/<name>
+kubectl rollout history deployment/<name>
 ```
+
+### Exam-Allowed Documentation
+- https://kubernetes.io/docs/
+- https://helm.sh/docs/
+- https://kubernetes.io/docs/reference/kubectl/cheatsheet/
