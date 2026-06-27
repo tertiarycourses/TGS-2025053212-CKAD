@@ -75,7 +75,7 @@ The `-t` flag sets the tag (`name:version`). The trailing `.` is the build conte
 ## Step 5 — Run and test the container
 
 ```bash
-docker run -d --name hello -p 8080:8080 ckad/hello:1.0
+docker run -d --name hello -p 8080:5000 ckad/hello:1.0
 curl http://localhost:8080
 ```
 
