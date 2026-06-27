@@ -1,24 +1,37 @@
-# Lab 4 — Jobs (Run-to-Completion)
+# Lab 4 — Jobs (Run-to-Completion Workloads)
 
-A Job runs Pods until a target number of successful completions is reached. In this lab you will create a one-shot Job, a parallel Job, and a Job with retries on failure. CKAD frequently asks for `completions`, `parallelism` and `backoffLimit`.
+A Job runs Pods until a required number of successful completions is reached — then it stops. CKAD 2026 tests `completions`, `parallelism`, `backoffLimit`, and `activeDeadlineSeconds` in almost every sitting. You must be able to write a Job manifest from memory.
 
-Run on the Killercoda Kubernetes Playground:
-https://killercoda.com/playgrounds/scenario/kubernetes
+Run on https://killercoda.com/playgrounds/scenario/kubernetes
+
+**Required software (free):**
+- `kubectl` (pre-installed on Killercoda)
+- `busybox`, `perl:5.34` images (pulled automatically)
 
 ---
 
-## Step 1 — Create a one-shot Job imperatively
+## Step 1 — Set exam aliases
 
 ```bash
 alias k=kubectl
-k create job hello --image=busybox -- echo "hello CKAD"
-k get jobs,pods -l job-name=hello
-k logs -l job-name=hello
+export do="--dry-run=client -o yaml"
 ```
 
 ---
 
-## Step 2 — Parallel Job with multiple completions
+## Step 2 — One-shot Job (imperative)
+
+```bash
+k create job hello --image=busybox -- echo "hello CKAD 2026"
+k get jobs,pods -l job-name=hello
+k logs -l job-name=hello
+```
+
+A Job creates a Pod, waits for it to exit 0, and marks the Job `Complete`. The Pod is retained for log inspection.
+
+---
+
+## Step 3 — Parallel Job with multiple completions
 
 ```bash
 cat > parallel.yaml <<'EOF'
@@ -36,20 +49,21 @@ spec:
       containers:
       - name: pi
         image: perl:5.34
-        command: ["perl","-Mbignum=bpi","-wle","print bpi(50)"]
+        command: ["perl", "-Mbignum=bpi", "-wle", "print bpi(50)"]
 EOF
 k apply -f parallel.yaml
-k get jobs pi-parallel -w   # ctrl+C after Completions reaches 5/5
+k get job pi-parallel -w
 ```
 
-Field meaning:
-- `completions: 5` — five successful Pods are required
-- `parallelism: 2` — at most two Pods run at the same time
-- `backoffLimit: 4` — four failures before the Job is marked failed
+Field definitions (memorise these for the exam):
+- `completions: 5` — need five successful Pod completions
+- `parallelism: 2` — run at most two Pods simultaneously
+- `backoffLimit: 4` — allow up to four Pod failures before failing the Job
+- `restartPolicy: Never` — required for Job Pod templates (not `Always`)
 
 ---
 
-## Step 3 — Failing Job and backoffLimit
+## Step 4 — Failing Job and backoffLimit
 
 ```bash
 cat > fail.yaml <<'EOF'
@@ -65,20 +79,21 @@ spec:
       containers:
       - name: f
         image: busybox
-        command: ["sh","-c","exit 1"]
+        command: ["sh", "-c", "exit 1"]
 EOF
 k apply -f fail.yaml
+sleep 30
 k get pods -l job-name=must-fail
+k describe job must-fail | grep -A2 Conditions
 ```
 
-After three failures (1 initial + 2 retries) the Job will report `BackoffLimitExceeded`.
+After three failures (1 attempt + 2 retries) the Job status shows `BackoffLimitExceeded`.
 
 ---
 
-## Step 4 — Job activeDeadlineSeconds
+## Step 5 — Job with activeDeadlineSeconds
 
 ```bash
-k delete job must-fail
 cat > deadline.yaml <<'EOF'
 apiVersion: batch/v1
 kind: Job
@@ -92,26 +107,37 @@ spec:
       containers:
       - name: s
         image: busybox
-        command: ["sh","-c","sleep 60"]
+        command: ["sh", "-c", "sleep 60"]
 EOF
 k apply -f deadline.yaml
 sleep 15
-k describe job too-slow | grep -A1 Conditions
+k describe job too-slow | grep -A2 Conditions
 ```
 
-The Job is terminated after 10 seconds with `Reason: DeadlineExceeded`.
+`activeDeadlineSeconds` limits total Job wall-clock time. The Job is terminated with `DeadlineExceeded` regardless of `backoffLimit`.
 
 ---
 
-## Step 5 — Clean up
+## Step 6 — Clean up
 
 ```bash
-k delete job hello pi-parallel too-slow
+k delete job hello pi-parallel must-fail too-slow --ignore-not-found
 ```
+
+---
+
+## Free online tools
+
+- **Jobs concept doc**: https://kubernetes.io/docs/concepts/workloads/controllers/job/
+- **batch/v1 API reference**: https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/job-v1/
+- **killer.sh** — CKAD mock exam: https://killer.sh
+- **Kubernetes docs** (allowed in CKAD exam): https://kubernetes.io/docs/
 
 ---
 
 ## What you learned
-- The three core Job knobs: `completions`, `parallelism`, `backoffLimit`.
-- `restartPolicy: Never` for Pod templates owned by Jobs.
-- How `activeDeadlineSeconds` bounds total Job run-time.
+
+- `restartPolicy: Never` is mandatory in Job Pod templates.
+- `completions` × `parallelism` controls throughput; `backoffLimit` controls fault tolerance.
+- `activeDeadlineSeconds` is a hard wall-clock ceiling on the entire Job.
+- Use `kubectl get job -w` to watch `COMPLETIONS` tick up in real time.

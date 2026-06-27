@@ -1,16 +1,26 @@
 # Lab 8 — Volumes (emptyDir and hostPath)
 
-Containers are ephemeral; volumes are how data survives a restart or is shared between containers in a Pod. In this lab you will mount an `emptyDir` for inter-container scratch space and a `hostPath` for direct node access. PersistentVolumes are covered later in the deployment domain.
+Containers are ephemeral — any data written to the container filesystem is lost on restart. Volumes survive restarts and can be shared between containers. CKAD 2026 tests `emptyDir`, `emptyDir.medium: Memory`, `hostPath`, and mounting strategies.
 
-Run on the Killercoda Kubernetes Playground:
-https://killercoda.com/playgrounds/scenario/kubernetes
+Run on https://killercoda.com/playgrounds/scenario/kubernetes
+
+**Required software (free):**
+- `kubectl` (pre-installed on Killercoda)
+- `busybox` image (pre-pulled on Killercoda)
 
 ---
 
-## Step 1 — emptyDir shared between two containers
+## Step 1 — Set exam aliases
 
 ```bash
 alias k=kubectl
+```
+
+---
+
+## Step 2 — emptyDir shared between two containers
+
+```bash
 cat > emptydir.yaml <<'EOF'
 apiVersion: v1
 kind: Pod
@@ -23,28 +33,29 @@ spec:
   containers:
   - name: writer
     image: busybox
-    command: ["sh","-c","echo hello-shared > /data/msg.txt; sleep 3600"]
+    command: ["sh", "-c", "echo hello-shared > /data/msg.txt; sleep 3600"]
     volumeMounts:
-    - { name: shared, mountPath: /data }
+    - name: shared
+      mountPath: /data
   - name: reader
     image: busybox
-    command: ["sh","-c","sleep 5; cat /data/msg.txt; sleep 3600"]
+    command: ["sh", "-c", "sleep 5; cat /data/msg.txt; sleep 3600"]
     volumeMounts:
-    - { name: shared, mountPath: /data }
+    - name: shared
+      mountPath: /data
 EOF
-k apply -f emptydir.yaml
-sleep 8
+k apply -f scratch.yaml 2>/dev/null || k apply -f emptydir.yaml
+sleep 10
 k logs scratch -c reader
 ```
 
-`emptyDir` lives as long as the Pod. Deleting the Pod erases it.
+Expected: `hello-shared`. The `emptyDir` is created when the Pod starts and deleted when the Pod is removed.
 
 ---
 
-## Step 2 — emptyDir backed by RAM
+## Step 3 — emptyDir backed by RAM (tmpfs)
 
 ```bash
-k delete pod scratch --force --grace-period 0
 cat > ramdisk.yaml <<'EOF'
 apiVersion: v1
 kind: Pod
@@ -59,20 +70,21 @@ spec:
   containers:
   - name: c
     image: busybox
-    command: ["sh","-c","mount | grep /data; sleep 3600"]
+    command: ["sh", "-c", "df -h /data; sleep 3600"]
     volumeMounts:
-    - { name: fast, mountPath: /data }
+    - name: fast
+      mountPath: /data
 EOF
 k apply -f ramdisk.yaml
 sleep 3
 k logs ramdisk
 ```
 
-`medium: Memory` allocates a tmpfs — handy for cache or secrets.
+`medium: Memory` mounts a tmpfs — data lives in RAM, is faster, and disappears on Pod termination or node reboot.
 
 ---
 
-## Step 3 — hostPath: see files on the underlying node
+## Step 4 — hostPath: access files on the node
 
 ```bash
 cat > hostpath.yaml <<'EOF'
@@ -84,9 +96,11 @@ spec:
   containers:
   - name: peek
     image: busybox
-    command: ["sh","-c","ls /node-etc | head; sleep 3600"]
+    command: ["sh", "-c", "ls /node-etc | head -10; sleep 3600"]
     volumeMounts:
-    - { name: etc, mountPath: /node-etc, readOnly: true }
+    - name: etc
+      mountPath: /node-etc
+      readOnly: true
   volumes:
   - name: etc
     hostPath:
@@ -98,19 +112,30 @@ sleep 3
 k logs host-peek
 ```
 
-`hostPath` mounts a path **from the node** into the Pod. Treat it as a security risk in production — used here only for learning.
+`hostPath` mounts a directory directly from the underlying node. Only use it for DaemonSets and node-level tools — it is a security risk in multi-tenant clusters.
 
 ---
 
-## Step 4 — Clean up
+## Step 5 — Clean up
 
 ```bash
-k delete pod ramdisk host-peek --force --grace-period 0
+k delete pod scratch ramdisk host-peek --force --grace-period=0 --ignore-not-found
 ```
 
 ---
 
+## Free online tools
+
+- **Volumes docs**: https://kubernetes.io/docs/concepts/storage/volumes/
+- **emptyDir reference**: https://kubernetes.io/docs/concepts/storage/volumes/#emptydir
+- **killer.sh** — CKAD mock exam: https://killer.sh
+- **Kubernetes docs** (allowed in CKAD exam): https://kubernetes.io/docs/
+
+---
+
 ## What you learned
-- `emptyDir` for ephemeral Pod-local scratch space.
-- `emptyDir.medium: Memory` for tmpfs-backed fast storage.
-- `hostPath` for direct node access — useful in DaemonSets, risky elsewhere.
+
+- `emptyDir: {}` — ephemeral scratch space, shared by all containers in the Pod.
+- `emptyDir.medium: Memory` — tmpfs-backed, fast, counted against container memory limits.
+- `hostPath` — mounts from the node; avoid in production, useful in DaemonSets.
+- Volumes are declared under `spec.volumes` and consumed via `spec.containers[].volumeMounts`.

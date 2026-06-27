@@ -1,23 +1,32 @@
 # Lab 25 — RBAC (Role and RoleBinding)
 
-RBAC controls **who** can do **what** on **which** resources. In this lab you will create a Role, bind it to a ServiceAccount with a RoleBinding, and verify with `kubectl auth can-i`.
+RBAC controls who can do what on which resources. CKAD 2026 tests creating Roles, ClusterRoles, RoleBindings, and ClusterRoleBindings imperatively, and validating with `kubectl auth can-i --as`. You must know the difference between namespace-scoped and cluster-scoped permissions.
 
-Run on the Killercoda Kubernetes Playground:
-https://killercoda.com/playgrounds/scenario/kubernetes
+Run on https://killercoda.com/playgrounds/scenario/kubernetes
+
+**Required software (free):**
+- `kubectl` (pre-installed on Killercoda)
 
 ---
 
-## Step 1 — Create a ServiceAccount in a fresh namespace
+## Step 1 — Set exam aliases
 
 ```bash
 alias k=kubectl
+```
+
+---
+
+## Step 2 — Create a namespace and ServiceAccount
+
+```bash
 k create namespace dev
 k create serviceaccount viewer -n dev
 ```
 
 ---
 
-## Step 2 — Role that allows reading Pods
+## Step 3 — Role: namespace-scoped permissions
 
 ```bash
 k create role pod-reader \
@@ -27,32 +36,35 @@ k create role pod-reader \
 k describe role pod-reader -n dev
 ```
 
+A `Role` is always scoped to one namespace. Verbs: `get`, `list`, `watch`, `create`, `update`, `patch`, `delete`, `deletecollection`.
+
 ---
 
-## Step 3 — RoleBinding linking the Role to the SA
+## Step 4 — RoleBinding: link Role to ServiceAccount
 
 ```bash
 k create rolebinding viewer-binding \
   --role=pod-reader \
   --serviceaccount=dev:viewer \
   -n dev
+k describe rolebinding viewer-binding -n dev
 ```
 
 ---
 
-## Step 4 — Test with `kubectl auth can-i`
+## Step 5 — Validate with kubectl auth can-i
 
 ```bash
-k auth can-i list pods   -n dev --as=system:serviceaccount:dev:viewer
-k auth can-i delete pods -n dev --as=system:serviceaccount:dev:viewer
+k auth can-i list pods   -n dev     --as=system:serviceaccount:dev:viewer
+k auth can-i delete pods -n dev     --as=system:serviceaccount:dev:viewer
 k auth can-i list pods   -n default --as=system:serviceaccount:dev:viewer
 ```
 
-Expected: `yes`, `no`, `no`.
+Expected: `yes`, `no`, `no`. The Role only covers the `dev` namespace.
 
 ---
 
-## Step 5 — Cluster-scoped: ClusterRole + ClusterRoleBinding
+## Step 6 — ClusterRole + ClusterRoleBinding (cluster-wide)
 
 ```bash
 k create clusterrole node-reader --verb=get,list --resource=nodes
@@ -63,26 +75,40 @@ k create clusterrolebinding nodes-binding \
 k auth can-i list nodes --as=system:serviceaccount:dev:nodes-sa
 ```
 
-ClusterRole + ClusterRoleBinding = cluster-wide permission. ClusterRole + RoleBinding = the cluster role's verbs limited to one namespace.
+Expected: `yes`. A ClusterRole bound via ClusterRoleBinding grants permission in all namespaces.
 
 ---
 
-## Step 6 — Verbs cheat-sheet
+## Step 7 — ClusterRole + RoleBinding (one namespace only)
 
-| Verb | What it allows |
-|------|---------------|
-| get | Read a single object |
-| list | List objects (also includes get on collection) |
-| watch | Stream changes |
-| create | POST a new object |
-| update | PUT an existing object |
-| patch | PATCH (partial update) |
-| delete | DELETE a single object |
-| deletecollection | DELETE many |
+```bash
+k create rolebinding dev-node-reader \
+  --clusterrole=node-reader \
+  --serviceaccount=dev:viewer \
+  -n dev
+k auth can-i list nodes -n dev --as=system:serviceaccount:dev:viewer
+```
+
+A ClusterRole used with a RoleBinding limits permissions to the binding's namespace — a common exam pattern.
 
 ---
 
-## Step 7 — Clean up
+## Step 8 — RBAC verb reference
+
+| Verb | HTTP Method | Use Case |
+|------|-------------|----------|
+| `get` | GET (single) | Read one object |
+| `list` | GET (collection) | List all objects |
+| `watch` | GET (watch) | Stream change events |
+| `create` | POST | Create a new object |
+| `update` | PUT | Full replace |
+| `patch` | PATCH | Partial update |
+| `delete` | DELETE | Delete one object |
+| `deletecollection` | DELETE | Delete many |
+
+---
+
+## Step 9 — Clean up
 
 ```bash
 k delete clusterrolebinding nodes-binding
@@ -92,7 +118,18 @@ k delete namespace dev
 
 ---
 
+## Free online tools
+
+- **RBAC docs**: https://kubernetes.io/docs/reference/access-authn-authz/rbac/
+- **kubectl auth can-i reference**: https://kubernetes.io/docs/reference/kubectl/generated/kubectl_auth_can-i/
+- **killer.sh** — CKAD mock exam: https://killer.sh
+- **Kubernetes docs** (allowed in CKAD exam): https://kubernetes.io/docs/
+
+---
+
 ## What you learned
-- Role + RoleBinding (namespaced) vs ClusterRole + ClusterRoleBinding (cluster-wide).
-- `kubectl create role|rolebinding|clusterrole|clusterrolebinding` imperative shortcuts.
-- `kubectl auth can-i ... --as=` to verify RBAC without logging in.
+
+- `Role` + `RoleBinding` = namespace-scoped permissions.
+- `ClusterRole` + `ClusterRoleBinding` = cluster-wide permissions.
+- `ClusterRole` + `RoleBinding` = cluster role's verbs limited to one namespace.
+- `kubectl auth can-i <verb> <resource> --as=<identity>` validates without authenticating.
