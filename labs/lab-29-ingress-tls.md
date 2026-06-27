@@ -110,7 +110,10 @@ kubectl patch ing demo --type=json -p='[
 curl -k --resolve demo.local:$HTTPS_PORT:127.0.0.1 \
   https://demo.local:$HTTPS_PORT/v2
 ```
-
+```bash
+if see any issue then apply the patch 
+kubectl patch deploy v2 --type=strategic -p='{"spec":{"template":{"spec":{"containers":[{"name":"http-echo","command":["/http-echo"],"args":["-text=hello-v2"]}]}}}}'
+```
 Expected: `hello-v2`.
 
 ---
