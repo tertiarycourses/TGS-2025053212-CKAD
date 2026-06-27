@@ -30,9 +30,8 @@ echo "HTTP=$HTTP_PORT  HTTPS=$HTTPS_PORT"
 ## Step 2 — Create the backend Service
 
 ```bash
-k create deployment web --image=hashicorp/http-echo --replicas=2 \
-  -- -text=hello-ingress
-k expose deployment web --port=5678 --target-port=5678
+kubectl create deployment web --image=hashicorp/http-echo --replicas=2 -- -text=hello-ingress
+kubectl expose deployment web --port=5678 --target-port=5678
 ```
 
 ---
