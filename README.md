@@ -97,7 +97,7 @@ The [`courseware/`](courseware/) folder holds the generated training deliverable
 
 | File | Description |
 |------|-------------|
-| [`CKAD-Certified-Kubernetes-Application-Developer.pptx`](courseware/CKAD-Certified-Kubernetes-Application-Developer.pptx) | Slide deck (263 slides, all 4 days) |
+| [`CKAD-Certified-Kubernetes-Application-Developer.pptx`](courseware/CKAD-Certified-Kubernetes-Application-Developer.pptx) | Slide deck (284 slides, all 4 days) |
 | [`CKAD-Certified-Kubernetes-Application-Developer.pdf`](courseware/CKAD-Certified-Kubernetes-Application-Developer.pdf) | PDF version of the slide deck |
 | [`LG-Certified-Kubernetes-Application-Developer-CKAD.docx`](courseware/LG-Certified-Kubernetes-Application-Developer-CKAD.docx) | Learner Guide (Word) |
 | [`LP-Certified-Kubernetes-Application-Developer-CKAD.docx`](courseware/LP-Certified-Kubernetes-Application-Developer-CKAD.docx) | Lesson Plan (Word) |
