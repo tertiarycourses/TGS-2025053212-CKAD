@@ -93,14 +93,16 @@ Hands-on summative assessments, one per training day:
 
 ## Courseware
 
-The [`courseware/`](courseware/) folder holds the generated training deliverables:
+The [`courseware/`](courseware/) folder holds the generated training deliverables (Version 1.0):
 
 | File | Description |
 |------|-------------|
-| [`CKAD-Certified-Kubernetes-Application-Developer.pptx`](courseware/CKAD-Certified-Kubernetes-Application-Developer.pptx) | Slide deck (284 slides, all 4 days) |
-| [`CKAD-Certified-Kubernetes-Application-Developer.pdf`](courseware/CKAD-Certified-Kubernetes-Application-Developer.pdf) | PDF version of the slide deck |
-| [`LG-Certified-Kubernetes-Application-Developer-CKAD.docx`](courseware/LG-Certified-Kubernetes-Application-Developer-CKAD.docx) | Learner Guide (Word) |
-| [`LP-Certified-Kubernetes-Application-Developer-CKAD.docx`](courseware/LP-Certified-Kubernetes-Application-Developer-CKAD.docx) | Lesson Plan (Word) |
+| [`CKAD-Certified-Kubernetes-Application-Developer-v1.0.pptx`](courseware/CKAD-Certified-Kubernetes-Application-Developer-v1.0.pptx) | Slide deck — 344 slides, all 4 days (includes an online practice-exam slide) |
+| [`CKAD-Certified-Kubernetes-Application-Developer-v1.0.pdf`](courseware/CKAD-Certified-Kubernetes-Application-Developer-v1.0.pdf) | PDF version of the slide deck |
+| [`LG-Certified-Kubernetes-Application-Developer-CKAD.docx`](courseware/LG-Certified-Kubernetes-Application-Developer-CKAD.docx) · [PDF](courseware/LG-Certified-Kubernetes-Application-Developer-CKAD.pdf) | Learner Guide (Word + PDF) |
+| [`LP-Certified-Kubernetes-Application-Developer-CKAD.docx`](courseware/LP-Certified-Kubernetes-Application-Developer-CKAD.docx) · [PDF](courseware/LP-Certified-Kubernetes-Application-Developer-CKAD.pdf) | Lesson Plan (Word + PDF) — day schedule with per-session slide page references |
+
+Courseware is generated from single-source scripts in [`.claude/skills/`](.claude/skills/) (Tertiary Infotech WSQ house skills for slides, Learner Guide, Lesson Plan and assessments).
 
 ---
 

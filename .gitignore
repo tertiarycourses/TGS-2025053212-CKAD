@@ -3,3 +3,8 @@ __pycache__/
 .DS_Store
 Thumbs.db
 *.tmp
+
+# WSQ assessment materials (confidential — never pushed)
+/assessment/
+/assessment\ /
+/CKAD reference/
