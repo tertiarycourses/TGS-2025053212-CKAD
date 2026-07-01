@@ -78,16 +78,16 @@ A complete set of **30 step-by-step labs** aligned to the CNCF **CKAD v1.35** ex
 
 ---
 
-## Practicum Assessments
+## Practicums
 
-Hands-on summative assessments, one per training day:
+Hands-on practicum exercises, one per training day:
 
-| Assessment | Coverage | Time |
-|------------|----------|------|
-| [Practicum 1](labs/assessments/practicum-1/question.md) | Domain 1 — Application Design & Build | 45 min |
-| [Practicum 2](labs/assessments/practicum-2/question.md) | Domain 2 — Application Deployment | 45 min |
-| [Practicum 3](labs/assessments/practicum-3/question.md) | Domains 3 & 4 — Observability, Config & Security | 45 min |
-| [Practicum 4](labs/assessments/practicum-4/question.md) | Domain 5 + Final Mock (all domains) | 2 hr |
+| Practicum | Coverage | Time |
+|-----------|----------|------|
+| [Practicum 1](labs/practicums/practicum-1/question.md) | Domain 1 — Application Design & Build | 45 min |
+| [Practicum 2](labs/practicums/practicum-2/question.md) | Domain 2 — Application Deployment | 45 min |
+| [Practicum 3](labs/practicums/practicum-3/question.md) | Domains 3 & 4 — Observability, Config & Security | 45 min |
+| [Practicum 4](labs/practicums/practicum-4/question.md) | Domain 5 + Final Mock (all domains) | 2 hr |
 
 ---
 
