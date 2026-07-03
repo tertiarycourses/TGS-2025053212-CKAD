@@ -1,0 +1,55 @@
+{
+  "title": "Lab 25 — RBAC (Role and RoleBinding)",
+  "description": "RBAC controls who can do what on which resources. CKAD 2026 tests creating Roles, ClusterRoles, RoleBindings, and ClusterRoleBindings imperatively,...",
+  "difficulty": "intermediate",
+  "time": "30",
+  "details": {
+    "steps": [
+      {
+        "title": "Step 1: Set exam aliases",
+        "text": "step1/text.md"
+      },
+      {
+        "title": "Step 2: Create a namespace and ServiceAccount",
+        "text": "step2/text.md"
+      },
+      {
+        "title": "Step 3: Role: namespace-scoped permissions",
+        "text": "step3/text.md"
+      },
+      {
+        "title": "Step 4: RoleBinding: link Role to ServiceAccount",
+        "text": "step4/text.md"
+      },
+      {
+        "title": "Step 5: Validate with kubectl auth can-i",
+        "text": "step5/text.md"
+      },
+      {
+        "title": "Step 6: ClusterRole + ClusterRoleBinding (cluster-wide)",
+        "text": "step6/text.md"
+      },
+      {
+        "title": "Step 7: ClusterRole + RoleBinding (one namespace only)",
+        "text": "step7/text.md"
+      },
+      {
+        "title": "Step 8: RBAC verb reference",
+        "text": "step8/text.md"
+      },
+      {
+        "title": "Step 9: Clean up",
+        "text": "step9/text.md"
+      }
+    ],
+    "intro": {
+      "text": "intro.md"
+    },
+    "finish": {
+      "text": "finish.md"
+    }
+  },
+  "backend": {
+    "imageid": "kubernetes"
+  }
+}

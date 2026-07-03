@@ -2,7 +2,7 @@
 
 A DaemonSet runs exactly one Pod per matching node — used for log collectors, CNI agents, and node exporters. A StatefulSet gives Pods stable network identities and ordered start/stop — used for databases and leader-elected services. CKAD 2026 expects you to know when to use each and how to write the YAML.
 
-Run on https://killercoda.com/playgrounds/scenario/kubernetes
+**Lab environment:** [KillerCoda](https://killercoda.com/tertiary-labs-ckad/course/killercoda/lab-15-daemonset-statefulset)
 
 **Required software (free):**
 - `kubectl` (pre-installed on Killercoda)

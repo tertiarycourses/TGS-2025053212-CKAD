@@ -2,7 +2,7 @@
 
 Containers in the same Pod share a network namespace and can share volumes. CKAD 2026 tests the sidecar pattern (helper reads/writes a shared volume) and the native sidecar container feature (Kubernetes 1.29+). You must be able to exec into a specific container and read logs from each.
 
-Run on https://killercoda.com/playgrounds/scenario/kubernetes
+**Lab environment:** [KillerCoda](https://killercoda.com/tertiary-labs-ckad/course/killercoda/lab-06-sidecar-pod)
 
 **Required software (free):**
 - `kubectl` (pre-installed on Killercoda)

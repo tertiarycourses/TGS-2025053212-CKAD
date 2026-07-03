@@ -1,0 +1,47 @@
+{
+  "title": "Lab 15 — DaemonSets and StatefulSets",
+  "description": "A DaemonSet runs exactly one Pod per matching node — used for log collectors, CNI agents, and node exporters. A StatefulSet gives Pods stable netwo...",
+  "difficulty": "intermediate",
+  "time": "30",
+  "details": {
+    "steps": [
+      {
+        "title": "Step 1: Set exam aliases",
+        "text": "step1/text.md"
+      },
+      {
+        "title": "Step 2: DaemonSet on every node",
+        "text": "step2/text.md"
+      },
+      {
+        "title": "Step 3: Headless Service for the StatefulSet",
+        "text": "step3/text.md"
+      },
+      {
+        "title": "Step 4: StatefulSet with stable identities",
+        "text": "step4/text.md"
+      },
+      {
+        "title": "Step 5: Verify stable per-Pod DNS",
+        "text": "step5/text.md"
+      },
+      {
+        "title": "Step 6: Scale a StatefulSet",
+        "text": "step6/text.md"
+      },
+      {
+        "title": "Step 7: Clean up",
+        "text": "step7/text.md"
+      }
+    ],
+    "intro": {
+      "text": "intro.md"
+    },
+    "finish": {
+      "text": "finish.md"
+    }
+  },
+  "backend": {
+    "imageid": "kubernetes"
+  }
+}

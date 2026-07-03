@@ -1,0 +1,47 @@
+{
+  "title": "Lab 11 — Blue/Green Deployment",
+  "description": "Blue/Green keeps two complete copies of the application alive simultaneously. A Service selector switch flips 100% of traffic from the old version ...",
+  "difficulty": "intermediate",
+  "time": "30",
+  "details": {
+    "steps": [
+      {
+        "title": "Step 1: Set exam aliases",
+        "text": "step1/text.md"
+      },
+      {
+        "title": "Step 2: Deploy blue (current production)",
+        "text": "step2/text.md"
+      },
+      {
+        "title": "Step 3: Deploy green (next version, no live traffic yet)",
+        "text": "step3/text.md"
+      },
+      {
+        "title": "Step 4: Smoke-test green directly before cutover",
+        "text": "step4/text.md"
+      },
+      {
+        "title": "Step 5: Flip the Service to green (atomic cutover)",
+        "text": "step5/text.md"
+      },
+      {
+        "title": "Step 6: Roll back instantly (if needed)",
+        "text": "step6/text.md"
+      },
+      {
+        "title": "Step 7: Decommission blue after confidence",
+        "text": "step7/text.md"
+      }
+    ],
+    "intro": {
+      "text": "intro.md"
+    },
+    "finish": {
+      "text": "finish.md"
+    }
+  },
+  "backend": {
+    "imageid": "kubernetes"
+  }
+}

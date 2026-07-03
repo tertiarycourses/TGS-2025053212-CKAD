@@ -1,0 +1,47 @@
+{
+  "title": "Lab 19 — Debugging Pods and Events",
+  "description": "CKAD 2026 regularly includes broken workloads that you must diagnose and fix within a time limit. In this lab you will identify and resolve three c...",
+  "difficulty": "intermediate",
+  "time": "30",
+  "details": {
+    "steps": [
+      {
+        "title": "Step 1: Set exam aliases",
+        "text": "step1/text.md"
+      },
+      {
+        "title": "Step 2: Diagnose: ImagePullBackOff",
+        "text": "step2/text.md"
+      },
+      {
+        "title": "Step 3: Diagnose: CrashLoopBackOff",
+        "text": "step3/text.md"
+      },
+      {
+        "title": "Step 4: Diagnose: OOMKilled",
+        "text": "step4/text.md"
+      },
+      {
+        "title": "Step 5: Cluster-wide event stream",
+        "text": "step5/text.md"
+      },
+      {
+        "title": "Step 6: kubectl debug: ephemeral container",
+        "text": "step6/text.md"
+      },
+      {
+        "title": "Step 7: Clean up",
+        "text": "step7/text.md"
+      }
+    ],
+    "intro": {
+      "text": "intro.md"
+    },
+    "finish": {
+      "text": "finish.md"
+    }
+  },
+  "backend": {
+    "imageid": "kubernetes"
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "title": "Lab 27 — Services (ClusterIP, NodePort, LoadBalancer)",
+  "description": "A Service gives a stable virtual IP and DNS name to a set of Pods. CKAD 2026 requires fluency with `ClusterIP`, `NodePort`, and `LoadBalancer` type...",
+  "difficulty": "intermediate",
+  "time": "30",
+  "details": {
+    "steps": [
+      {
+        "title": "Step 1: Set exam aliases",
+        "text": "step1/text.md"
+      },
+      {
+        "title": "Step 2: Create the backend Deployment",
+        "text": "step2/text.md"
+      },
+      {
+        "title": "Step 3: ClusterIP Service (in-cluster only)",
+        "text": "step3/text.md"
+      },
+      {
+        "title": "Step 4: NodePort Service (exposes a port on every node)",
+        "text": "step4/text.md"
+      },
+      {
+        "title": "Step 5: LoadBalancer Service",
+        "text": "step5/text.md"
+      },
+      {
+        "title": "Step 6: EndpointSlices",
+        "text": "step6/text.md"
+      },
+      {
+        "title": "Step 7: Debug a selector mismatch",
+        "text": "step7/text.md"
+      },
+      {
+        "title": "Step 8: Clean up",
+        "text": "step8/text.md"
+      }
+    ],
+    "intro": {
+      "text": "intro.md"
+    },
+    "finish": {
+      "text": "finish.md"
+    }
+  },
+  "backend": {
+    "imageid": "kubernetes"
+  }
+}

@@ -2,7 +2,7 @@
 
 The Kubernetes API evolves across releases — old API versions are deprecated and eventually removed. CKAD 2026 tests `kubectl explain`, `kubectl api-resources`, and `kubectl api-versions`. You must be able to find the correct `apiVersion` for any resource on exam day using only kubectl.
 
-Run on https://killercoda.com/playgrounds/scenario/kubernetes
+**Lab environment:** [KillerCoda](https://killercoda.com/tertiary-labs-ckad/course/killercoda/lab-20-api-deprecations)
 
 **Required software (free):**
 - `kubectl` (pre-installed on Killercoda)

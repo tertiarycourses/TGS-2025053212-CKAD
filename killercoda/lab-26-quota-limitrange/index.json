@@ -1,0 +1,51 @@
+{
+  "title": "Lab 26 — ResourceQuota and LimitRange",
+  "description": "`ResourceQuota` caps the **total** resources used across an entire namespace. `LimitRange` enforces **per-container** defaults and maximums. CKAD 2...",
+  "difficulty": "intermediate",
+  "time": "30",
+  "details": {
+    "steps": [
+      {
+        "title": "Step 1: Set exam aliases and create a test namespace",
+        "text": "step1/text.md"
+      },
+      {
+        "title": "Step 2: Apply a ResourceQuota",
+        "text": "step2/text.md"
+      },
+      {
+        "title": "Step 3: Apply a LimitRange (defaults and maximums)",
+        "text": "step3/text.md"
+      },
+      {
+        "title": "Step 4: Pod with no resource block gets defaults injected",
+        "text": "step4/text.md"
+      },
+      {
+        "title": "Step 5: Violate the LimitRange maximum",
+        "text": "step5/text.md"
+      },
+      {
+        "title": "Step 6: Exceed the ResourceQuota",
+        "text": "step6/text.md"
+      },
+      {
+        "title": "Step 7: Inspect quota usage",
+        "text": "step7/text.md"
+      },
+      {
+        "title": "Step 8: Clean up",
+        "text": "step8/text.md"
+      }
+    ],
+    "intro": {
+      "text": "intro.md"
+    },
+    "finish": {
+      "text": "finish.md"
+    }
+  },
+  "backend": {
+    "imageid": "kubernetes"
+  }
+}

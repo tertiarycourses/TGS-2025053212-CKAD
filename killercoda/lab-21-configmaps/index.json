@@ -1,0 +1,47 @@
+{
+  "title": "Lab 21 — ConfigMaps (Environment and Volume Injection)",
+  "description": "ConfigMaps inject non-secret configuration into Pods. CKAD 2026 tests all three injection styles: individual env vars (`valueFrom.configMapKeyRef`)...",
+  "difficulty": "intermediate",
+  "time": "30",
+  "details": {
+    "steps": [
+      {
+        "title": "Step 1: Set exam aliases",
+        "text": "step1/text.md"
+      },
+      {
+        "title": "Step 2: Create ConfigMaps three ways",
+        "text": "step2/text.md"
+      },
+      {
+        "title": "Step 3: Inject a single key as an environment variable",
+        "text": "step3/text.md"
+      },
+      {
+        "title": "Step 4: Inject all keys with envFrom",
+        "text": "step4/text.md"
+      },
+      {
+        "title": "Step 5: Mount a ConfigMap as a file volume",
+        "text": "step5/text.md"
+      },
+      {
+        "title": "Step 6: Live update (file mount vs env var)",
+        "text": "step6/text.md"
+      },
+      {
+        "title": "Step 7: Clean up",
+        "text": "step7/text.md"
+      }
+    ],
+    "intro": {
+      "text": "intro.md"
+    },
+    "finish": {
+      "text": "finish.md"
+    }
+  },
+  "backend": {
+    "imageid": "kubernetes"
+  }
+}

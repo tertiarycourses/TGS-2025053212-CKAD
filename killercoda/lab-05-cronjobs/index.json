@@ -1,0 +1,43 @@
+{
+  "title": "Lab 5 — CronJobs (Scheduled Workloads)",
+  "description": "A CronJob creates Jobs on a time-based schedule using standard cron syntax. CKAD 2026 tests `concurrencyPolicy`, `startingDeadlineSeconds`, history...",
+  "difficulty": "intermediate",
+  "time": "30",
+  "details": {
+    "steps": [
+      {
+        "title": "Step 1: Set exam aliases",
+        "text": "step1/text.md"
+      },
+      {
+        "title": "Step 2: Create a CronJob imperatively",
+        "text": "step2/text.md"
+      },
+      {
+        "title": "Step 3: Declarative CronJob with all key fields",
+        "text": "step3/text.md"
+      },
+      {
+        "title": "Step 4: Suspend and resume a CronJob",
+        "text": "step4/text.md"
+      },
+      {
+        "title": "Step 5: Trigger a CronJob manually (exam favourite)",
+        "text": "step5/text.md"
+      },
+      {
+        "title": "Step 6: Clean up",
+        "text": "step6/text.md"
+      }
+    ],
+    "intro": {
+      "text": "intro.md"
+    },
+    "finish": {
+      "text": "finish.md"
+    }
+  },
+  "backend": {
+    "imageid": "kubernetes"
+  }
+}

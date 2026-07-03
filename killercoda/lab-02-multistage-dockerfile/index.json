@@ -1,0 +1,43 @@
+{
+  "title": "Lab 2 — Multi-Stage Dockerfile",
+  "description": "Separate the build stage from the runtime stage to produce images that are 10× smaller and contain no compiler toolchain. Multi-stage builds are a ...",
+  "difficulty": "intermediate",
+  "time": "30",
+  "details": {
+    "steps": [
+      {
+        "title": "Step 1: Create the Go source file",
+        "text": "step1/text.md"
+      },
+      {
+        "title": "Step 2: Single-stage baseline (large image)",
+        "text": "step2/text.md"
+      },
+      {
+        "title": "Step 3: Multi-stage Dockerfile (small image)",
+        "text": "step3/text.md"
+      },
+      {
+        "title": "Step 4: Compare image sizes",
+        "text": "step4/text.md"
+      },
+      {
+        "title": "Step 5: Run the small image and test",
+        "text": "step5/text.md"
+      },
+      {
+        "title": "Step 6: Clean up",
+        "text": "step6/text.md"
+      }
+    ],
+    "intro": {
+      "text": "intro.md"
+    },
+    "finish": {
+      "text": "finish.md"
+    }
+  },
+  "backend": {
+    "imageid": "kubernetes"
+  }
+}

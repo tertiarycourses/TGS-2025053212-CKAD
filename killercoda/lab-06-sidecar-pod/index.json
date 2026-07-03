@@ -1,0 +1,43 @@
+{
+  "title": "Lab 6 — Multi-Container Pods (Sidecar Pattern)",
+  "description": "Containers in the same Pod share a network namespace and can share volumes. CKAD 2026 tests the sidecar pattern (helper reads/writes a shared volum...",
+  "difficulty": "intermediate",
+  "time": "30",
+  "details": {
+    "steps": [
+      {
+        "title": "Step 1: Set exam aliases",
+        "text": "step1/text.md"
+      },
+      {
+        "title": "Step 2: Sidecar that tails a shared log file",
+        "text": "step2/text.md"
+      },
+      {
+        "title": "Step 3: Read logs from each container separately",
+        "text": "step3/text.md"
+      },
+      {
+        "title": "Step 4: Exec into a specific container",
+        "text": "step4/text.md"
+      },
+      {
+        "title": "Step 5: Native sidecar container (Kubernetes 1.29+, CKAD 2026)",
+        "text": "step5/text.md"
+      },
+      {
+        "title": "Step 6: Clean up",
+        "text": "step6/text.md"
+      }
+    ],
+    "intro": {
+      "text": "intro.md"
+    },
+    "finish": {
+      "text": "finish.md"
+    }
+  },
+  "backend": {
+    "imageid": "kubernetes"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "title": "Lab 18 — kubectl top and Metrics Server",
+  "description": "`kubectl top` shows real-time CPU and memory for nodes and Pods. It requires the **metrics-server** add-on. CKAD 2026 tests installation of metrics...",
+  "difficulty": "intermediate",
+  "time": "30",
+  "details": {
+    "steps": [
+      {
+        "title": "Step 1: Install metrics-server",
+        "text": "step1/text.md"
+      },
+      {
+        "title": "Step 2: Top nodes",
+        "text": "step2/text.md"
+      },
+      {
+        "title": "Step 3: Generate CPU load",
+        "text": "step3/text.md"
+      },
+      {
+        "title": "Step 4: Top Pods, sorted by CPU and memory",
+        "text": "step4/text.md"
+      },
+      {
+        "title": "Step 5: Top a specific namespace",
+        "text": "step5/text.md"
+      },
+      {
+        "title": "Step 6: Clean up",
+        "text": "step6/text.md"
+      }
+    ],
+    "intro": {
+      "text": "intro.md"
+    },
+    "finish": {
+      "text": "finish.md"
+    }
+  },
+  "backend": {
+    "imageid": "kubernetes"
+  }
+}

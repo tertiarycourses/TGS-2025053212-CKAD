@@ -1,0 +1,39 @@
+{
+  "title": "Lab 8 — Volumes (emptyDir and hostPath)",
+  "description": "Containers are ephemeral — any data written to the container filesystem is lost on restart. Volumes survive restarts and can be shared between cont...",
+  "difficulty": "intermediate",
+  "time": "30",
+  "details": {
+    "steps": [
+      {
+        "title": "Step 1: Set exam aliases",
+        "text": "step1/text.md"
+      },
+      {
+        "title": "Step 2: emptyDir shared between two containers",
+        "text": "step2/text.md"
+      },
+      {
+        "title": "Step 3: emptyDir backed by RAM (tmpfs)",
+        "text": "step3/text.md"
+      },
+      {
+        "title": "Step 4: hostPath: access files on the node",
+        "text": "step4/text.md"
+      },
+      {
+        "title": "Step 5: Clean up",
+        "text": "step5/text.md"
+      }
+    ],
+    "intro": {
+      "text": "intro.md"
+    },
+    "finish": {
+      "text": "finish.md"
+    }
+  },
+  "backend": {
+    "imageid": "kubernetes"
+  }
+}

@@ -2,7 +2,7 @@
 
 A Deployment manages a ReplicaSet, which manages Pods. CKAD 2026 tests the full ownership chain, scaling, environment variable injection, and reading ReplicaSet history. Understanding this chain is required to debug failed rollouts.
 
-Run on https://killercoda.com/playgrounds/scenario/kubernetes
+**Lab environment:** [KillerCoda](https://killercoda.com/tertiary-labs-ckad/course/killercoda/lab-09-deployments)
 
 **Required software (free):**
 - `kubectl` (pre-installed on Killercoda)

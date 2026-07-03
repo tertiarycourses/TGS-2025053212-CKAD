@@ -2,7 +2,7 @@
 
 `kubectl logs` is the first debugging tool on the CKAD exam. In this lab you will read logs from single and multi-container Pods, follow a live stream, retrieve logs from a crashed container, and aggregate logs across a Deployment.
 
-Run on https://killercoda.com/playgrounds/scenario/kubernetes
+**Lab environment:** [KillerCoda](https://killercoda.com/tertiary-labs-ckad/course/killercoda/lab-17-logging)
 
 **Required software (free):**
 - `kubectl` (pre-installed on Killercoda)

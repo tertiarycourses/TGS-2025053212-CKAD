@@ -1,0 +1,7 @@
+# Lab 8 — Volumes (emptyDir and hostPath)
+
+Containers are ephemeral — any data written to the container filesystem is lost on restart. Volumes survive restarts and can be shared between cont...
+
+**Lab environment:** [KillerCoda](https://killercoda.com/tertiary-labs-ckad/course/killercoda/lab-08-volumes)
+
+A pre-built Kubernetes cluster (controlplane + node01) is ready to use — `kubectl` works immediately.

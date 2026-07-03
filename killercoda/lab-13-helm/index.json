@@ -1,0 +1,47 @@
+{
+  "title": "Lab 13 — Helm: Install, Upgrade, and Rollback",
+  "description": "Helm is the Kubernetes package manager. A chart is a bundle of YAML templates; a release is a deployed instance. CKAD 2026 tests `helm install`, `h...",
+  "difficulty": "intermediate",
+  "time": "30",
+  "details": {
+    "steps": [
+      {
+        "title": "Step 1: Install Helm",
+        "text": "step1/text.md"
+      },
+      {
+        "title": "Step 2: Add the Bitnami chart repository",
+        "text": "step2/text.md"
+      },
+      {
+        "title": "Step 3: Install a release with value overrides",
+        "text": "step3/text.md"
+      },
+      {
+        "title": "Step 4: Inspect the generated manifests and values",
+        "text": "step4/text.md"
+      },
+      {
+        "title": "Step 5: Upgrade the release",
+        "text": "step5/text.md"
+      },
+      {
+        "title": "Step 6: Roll back to revision 1",
+        "text": "step6/text.md"
+      },
+      {
+        "title": "Step 7: Uninstall the release",
+        "text": "step7/text.md"
+      }
+    ],
+    "intro": {
+      "text": "intro.md"
+    },
+    "finish": {
+      "text": "finish.md"
+    }
+  },
+  "backend": {
+    "imageid": "kubernetes"
+  }
+}

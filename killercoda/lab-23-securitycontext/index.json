@@ -1,0 +1,43 @@
+{
+  "title": "Lab 23 — SecurityContext",
+  "description": "`securityContext` controls the identity and privileges of containers. CKAD 2026 regularly asks you to enforce non-root execution, read-only root fi...",
+  "difficulty": "intermediate",
+  "time": "30",
+  "details": {
+    "steps": [
+      {
+        "title": "Step 1: Set exam aliases",
+        "text": "step1/text.md"
+      },
+      {
+        "title": "Step 2: Run as a specific user and group",
+        "text": "step2/text.md"
+      },
+      {
+        "title": "Step 3: Enforce runAsNonRoot",
+        "text": "step3/text.md"
+      },
+      {
+        "title": "Step 4: Read-only root filesystem",
+        "text": "step4/text.md"
+      },
+      {
+        "title": "Step 5: Drop Linux capabilities",
+        "text": "step5/text.md"
+      },
+      {
+        "title": "Step 6: Clean up",
+        "text": "step6/text.md"
+      }
+    ],
+    "intro": {
+      "text": "intro.md"
+    },
+    "finish": {
+      "text": "finish.md"
+    }
+  },
+  "backend": {
+    "imageid": "kubernetes"
+  }
+}

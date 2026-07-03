@@ -1,0 +1,43 @@
+{
+  "title": "Lab 7 — Init Containers",
+  "description": "Init containers run **in order, to completion**, before any main container starts. Use them to seed shared volumes, wait for upstream services, or ...",
+  "difficulty": "intermediate",
+  "time": "30",
+  "details": {
+    "steps": [
+      {
+        "title": "Step 1: Set exam aliases",
+        "text": "step1/text.md"
+      },
+      {
+        "title": "Step 2: Init container that seeds the web root",
+        "text": "step2/text.md"
+      },
+      {
+        "title": "Step 3: Verify the seeded content",
+        "text": "step3/text.md"
+      },
+      {
+        "title": "Step 4: Init container that waits for a Service",
+        "text": "step4/text.md"
+      },
+      {
+        "title": "Step 5: Unblock the init container by creating the Service",
+        "text": "step5/text.md"
+      },
+      {
+        "title": "Step 6: Clean up",
+        "text": "step6/text.md"
+      }
+    ],
+    "intro": {
+      "text": "intro.md"
+    },
+    "finish": {
+      "text": "finish.md"
+    }
+  },
+  "backend": {
+    "imageid": "kubernetes"
+  }
+}

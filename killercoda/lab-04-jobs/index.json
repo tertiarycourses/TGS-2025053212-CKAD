@@ -1,0 +1,43 @@
+{
+  "title": "Lab 4 — Jobs (Run-to-Completion Workloads)",
+  "description": "A Job runs Pods until a required number of successful completions is reached — then it stops. CKAD 2026 tests `completions`, `parallelism`, `backof...",
+  "difficulty": "intermediate",
+  "time": "30",
+  "details": {
+    "steps": [
+      {
+        "title": "Step 1: Set exam aliases",
+        "text": "step1/text.md"
+      },
+      {
+        "title": "Step 2: One-shot Job (imperative)",
+        "text": "step2/text.md"
+      },
+      {
+        "title": "Step 3: Parallel Job with multiple completions",
+        "text": "step3/text.md"
+      },
+      {
+        "title": "Step 4: Failing Job and backoffLimit",
+        "text": "step4/text.md"
+      },
+      {
+        "title": "Step 5: Job with activeDeadlineSeconds",
+        "text": "step5/text.md"
+      },
+      {
+        "title": "Step 6: Clean up",
+        "text": "step6/text.md"
+      }
+    ],
+    "intro": {
+      "text": "intro.md"
+    },
+    "finish": {
+      "text": "finish.md"
+    }
+  },
+  "backend": {
+    "imageid": "kubernetes"
+  }
+}

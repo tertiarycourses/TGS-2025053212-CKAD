@@ -2,7 +2,7 @@
 
 The Pod is the smallest schedulable unit in Kubernetes. In this lab you will create Pods imperatively, generate YAML with `--dry-run`, edit live manifests, and use the exam-critical `$do` alias that saves 30+ seconds per question.
 
-Run on https://killercoda.com/playgrounds/scenario/kubernetes
+**Lab environment:** [KillerCoda](https://killercoda.com/tertiary-labs-ckad/course/killercoda/lab-03-create-pods)
 
 **Required software (free):**
 - `kubectl` (pre-installed on Killercoda)

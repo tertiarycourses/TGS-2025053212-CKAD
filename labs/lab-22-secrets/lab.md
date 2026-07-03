@@ -2,7 +2,7 @@
 
 Secrets are like ConfigMaps but base64-encoded and with stricter access controls. CKAD 2026 tests `generic`, `tls`, and `docker-registry` Secret types, env-var injection, file-volume mounting with `defaultMode`, and decoding values. Secrets are not encrypted by default — protect them with RBAC.
 
-Run on https://killercoda.com/playgrounds/scenario/kubernetes
+**Lab environment:** [KillerCoda](https://killercoda.com/tertiary-labs-ckad/course/killercoda/lab-22-secrets)
 
 **Required software (free):**
 - `kubectl` (pre-installed on Killercoda)

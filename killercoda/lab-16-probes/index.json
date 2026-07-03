@@ -1,0 +1,43 @@
+{
+  "title": "Lab 16 — Liveness, Readiness, and Startup Probes",
+  "description": "Kubernetes uses three probes to manage container health: **livenessProbe** restarts a failed container, **readinessProbe** removes it from Service ...",
+  "difficulty": "intermediate",
+  "time": "30",
+  "details": {
+    "steps": [
+      {
+        "title": "Step 1: Set exam aliases",
+        "text": "step1/text.md"
+      },
+      {
+        "title": "Step 2: HTTP liveness + readiness probe",
+        "text": "step2/text.md"
+      },
+      {
+        "title": "Step 3: Trigger a liveness failure",
+        "text": "step3/text.md"
+      },
+      {
+        "title": "Step 4: TCP socket probe",
+        "text": "step4/text.md"
+      },
+      {
+        "title": "Step 5: Exec probe + startupProbe for slow-starting apps",
+        "text": "step5/text.md"
+      },
+      {
+        "title": "Step 6: Clean up",
+        "text": "step6/text.md"
+      }
+    ],
+    "intro": {
+      "text": "intro.md"
+    },
+    "finish": {
+      "text": "finish.md"
+    }
+  },
+  "backend": {
+    "imageid": "kubernetes"
+  }
+}

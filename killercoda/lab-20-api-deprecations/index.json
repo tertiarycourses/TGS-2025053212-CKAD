@@ -1,0 +1,51 @@
+{
+  "title": "Lab 20 — API Deprecations and kubectl explain",
+  "description": "The Kubernetes API evolves across releases — old API versions are deprecated and eventually removed. CKAD 2026 tests `kubectl explain`, `kubectl ap...",
+  "difficulty": "intermediate",
+  "time": "30",
+  "details": {
+    "steps": [
+      {
+        "title": "Step 1: Set exam aliases",
+        "text": "step1/text.md"
+      },
+      {
+        "title": "Step 2: List every resource and its API group",
+        "text": "step2/text.md"
+      },
+      {
+        "title": "Step 3: List all API versions served by the cluster",
+        "text": "step3/text.md"
+      },
+      {
+        "title": "Step 4: Explore a resource schema with explain",
+        "text": "step4/text.md"
+      },
+      {
+        "title": "Step 5: Detect a deprecated API",
+        "text": "step5/text.md"
+      },
+      {
+        "title": "Step 6: Look up the correct API version",
+        "text": "step6/text.md"
+      },
+      {
+        "title": "Step 7: Stable API version reference (Kubernetes v1.35)",
+        "text": "step7/text.md"
+      },
+      {
+        "title": "Step 8: Clean up",
+        "text": "step8/text.md"
+      }
+    ],
+    "intro": {
+      "text": "intro.md"
+    },
+    "finish": {
+      "text": "finish.md"
+    }
+  },
+  "backend": {
+    "imageid": "kubernetes"
+  }
+}

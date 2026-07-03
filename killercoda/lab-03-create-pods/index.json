@@ -1,0 +1,47 @@
+{
+  "title": "Lab 3 — Create and Manage Pods",
+  "description": "The Pod is the smallest schedulable unit in Kubernetes. In this lab you will create Pods imperatively, generate YAML with `--dry-run`, edit live ma...",
+  "difficulty": "intermediate",
+  "time": "30",
+  "details": {
+    "steps": [
+      {
+        "title": "Step 1: Set exam-speed aliases",
+        "text": "step1/text.md"
+      },
+      {
+        "title": "Step 2: Create a Pod imperatively",
+        "text": "step2/text.md"
+      },
+      {
+        "title": "Step 3: Generate a Pod manifest without creating it",
+        "text": "step3/text.md"
+      },
+      {
+        "title": "Step 4: Add a label and apply the manifest",
+        "text": "step4/text.md"
+      },
+      {
+        "title": "Step 5: Inspect a running Pod",
+        "text": "step5/text.md"
+      },
+      {
+        "title": "Step 6: Override the container command",
+        "text": "step6/text.md"
+      },
+      {
+        "title": "Step 7: Clean up",
+        "text": "step7/text.md"
+      }
+    ],
+    "intro": {
+      "text": "intro.md"
+    },
+    "finish": {
+      "text": "finish.md"
+    }
+  },
+  "backend": {
+    "imageid": "kubernetes"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "title": "Lab 30 — NetworkPolicy",
+  "description": "By default every Pod can communicate with every other Pod. NetworkPolicies restrict that traffic by allow-listing specific sources and destinations...",
+  "difficulty": "intermediate",
+  "time": "30",
+  "details": {
+    "steps": [
+      {
+        "title": "Step 1: Set exam aliases and create workloads",
+        "text": "step1/text.md"
+      },
+      {
+        "title": "Step 2: Default deny: block all ingress",
+        "text": "step2/text.md"
+      },
+      {
+        "title": "Step 3: Selective allow: only role=allowed can reach the backend",
+        "text": "step3/text.md"
+      },
+      {
+        "title": "Step 4: Egress lockdown: allow DNS only",
+        "text": "step4/text.md"
+      },
+      {
+        "title": "Step 5: Cross-namespace allow (namespaceSelector)",
+        "text": "step5/text.md"
+      },
+      {
+        "title": "Step 6: Clean up",
+        "text": "step6/text.md"
+      }
+    ],
+    "intro": {
+      "text": "intro.md"
+    },
+    "finish": {
+      "text": "finish.md"
+    }
+  },
+  "backend": {
+    "imageid": "kubernetes"
+  }
+}

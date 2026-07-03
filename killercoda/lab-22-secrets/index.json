@@ -1,0 +1,51 @@
+{
+  "title": "Lab 22 — Secrets",
+  "description": "Secrets are like ConfigMaps but base64-encoded and with stricter access controls. CKAD 2026 tests `generic`, `tls`, and `docker-registry` Secret ty...",
+  "difficulty": "intermediate",
+  "time": "30",
+  "details": {
+    "steps": [
+      {
+        "title": "Step 1: Set exam aliases",
+        "text": "step1/text.md"
+      },
+      {
+        "title": "Step 2: Create a generic Secret",
+        "text": "step2/text.md"
+      },
+      {
+        "title": "Step 3: Decode a Secret value",
+        "text": "step3/text.md"
+      },
+      {
+        "title": "Step 4: Inject Secret keys as environment variables",
+        "text": "step4/text.md"
+      },
+      {
+        "title": "Step 5: Mount a Secret as files with restrictive permissions",
+        "text": "step5/text.md"
+      },
+      {
+        "title": "Step 6: TLS Secret",
+        "text": "step6/text.md"
+      },
+      {
+        "title": "Step 7: Docker registry Secret",
+        "text": "step7/text.md"
+      },
+      {
+        "title": "Step 8: Clean up",
+        "text": "step8/text.md"
+      }
+    ],
+    "intro": {
+      "text": "intro.md"
+    },
+    "finish": {
+      "text": "finish.md"
+    }
+  },
+  "backend": {
+    "imageid": "kubernetes"
+  }
+}

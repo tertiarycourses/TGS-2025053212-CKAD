@@ -1,0 +1,51 @@
+{
+  "title": "Lab 24 — ServiceAccounts",
+  "description": "Every Pod runs as a ServiceAccount. The `default` ServiceAccount has minimal RBAC permissions. CKAD 2026 tests creating dedicated ServiceAccounts, ...",
+  "difficulty": "intermediate",
+  "time": "30",
+  "details": {
+    "steps": [
+      {
+        "title": "Step 1: Set exam aliases",
+        "text": "step1/text.md"
+      },
+      {
+        "title": "Step 2: Create a ServiceAccount",
+        "text": "step2/text.md"
+      },
+      {
+        "title": "Step 3: Attach the ServiceAccount to a Pod",
+        "text": "step3/text.md"
+      },
+      {
+        "title": "Step 4: Inspect the auto-mounted token inside the Pod",
+        "text": "step4/text.md"
+      },
+      {
+        "title": "Step 5: Use the token to call the Kubernetes API",
+        "text": "step5/text.md"
+      },
+      {
+        "title": "Step 6: Disable token auto-mount (least privilege)",
+        "text": "step6/text.md"
+      },
+      {
+        "title": "Step 7: Request a short-lived ad-hoc token",
+        "text": "step7/text.md"
+      },
+      {
+        "title": "Step 8: Clean up",
+        "text": "step8/text.md"
+      }
+    ],
+    "intro": {
+      "text": "intro.md"
+    },
+    "finish": {
+      "text": "finish.md"
+    }
+  },
+  "backend": {
+    "imageid": "kubernetes"
+  }
+}

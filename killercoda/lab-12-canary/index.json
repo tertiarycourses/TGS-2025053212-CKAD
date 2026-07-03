@@ -1,0 +1,43 @@
+{
+  "title": "Lab 12 — Canary Deployment",
+  "description": "A canary release sends a small fraction of live traffic to a new version while keeping the bulk on the stable version. In Kubernetes, traffic split...",
+  "difficulty": "intermediate",
+  "time": "30",
+  "details": {
+    "steps": [
+      {
+        "title": "Step 1: Set exam aliases",
+        "text": "step1/text.md"
+      },
+      {
+        "title": "Step 2: Stable Deployment (90% of traffic)",
+        "text": "step2/text.md"
+      },
+      {
+        "title": "Step 3: Canary Deployment (10% of traffic)",
+        "text": "step3/text.md"
+      },
+      {
+        "title": "Step 4: Verify the traffic split",
+        "text": "step4/text.md"
+      },
+      {
+        "title": "Step 5: Promote: scale up canary, retire stable",
+        "text": "step5/text.md"
+      },
+      {
+        "title": "Step 6: Clean up",
+        "text": "step6/text.md"
+      }
+    ],
+    "intro": {
+      "text": "intro.md"
+    },
+    "finish": {
+      "text": "finish.md"
+    }
+  },
+  "backend": {
+    "imageid": "kubernetes"
+  }
+}

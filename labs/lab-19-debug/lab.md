@@ -2,7 +2,7 @@
 
 CKAD 2026 regularly includes broken workloads that you must diagnose and fix within a time limit. In this lab you will identify and resolve three classic failure modes — `ImagePullBackOff`, `CrashLoopBackOff`, `OOMKilled` — and use `kubectl debug` for live triage.
 
-Run on https://killercoda.com/playgrounds/scenario/kubernetes
+**Lab environment:** [KillerCoda](https://killercoda.com/tertiary-labs-ckad/course/killercoda/lab-19-debug)
 
 **Required software (free):**
 - `kubectl` (pre-installed on Killercoda)
