@@ -2,7 +2,7 @@
 
 `kubectl top` shows real-time CPU and memory for nodes and Pods. It requires the **metrics-server** add-on. CKAD 2026 tests installation of metrics-server, reading node and Pod metrics, and sorting by resource usage — a common warm-up question in the exam.
 
-**Lab environment:** [Play with Kubernetes](https://labs.play-with-k8s.com)
+**Lab environment:** [Play with Kubernetes](https://killercoda.com/playgrounds/course/kubernetes-playgrounds)
 
 **Required software (free):**
 - `kubectl` (pre-installed on Killercoda)

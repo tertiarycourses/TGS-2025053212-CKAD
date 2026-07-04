@@ -2,7 +2,7 @@
 
 ConfigMaps inject non-secret configuration into Pods. CKAD 2026 tests all three injection styles: individual env vars (`valueFrom.configMapKeyRef`), bulk env vars (`envFrom`), and file-based volume mounts. You must also know that only file mounts update live — env vars require a Pod restart.
 
-**Lab environment:** [Play with Kubernetes](https://labs.play-with-k8s.com)
+**Lab environment:** [Play with Kubernetes](https://killercoda.com/playgrounds/course/kubernetes-playgrounds)
 
 **Required software (free):**
 - `kubectl` (pre-installed on Killercoda)

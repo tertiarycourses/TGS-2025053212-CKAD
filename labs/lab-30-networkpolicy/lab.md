@@ -2,7 +2,7 @@
 
 By default every Pod can communicate with every other Pod. NetworkPolicies restrict that traffic by allow-listing specific sources and destinations. CKAD 2026 regularly includes a NetworkPolicy question — you must write a default-deny policy and a selective allow policy from scratch.
 
-**Lab environment:** [Play with Kubernetes](https://labs.play-with-k8s.com)
+**Lab environment:** [Play with Kubernetes](https://killercoda.com/playgrounds/course/kubernetes-playgrounds)
 
 > Killercoda's Kubernetes playground enforces NetworkPolicy via the cluster CNI. If policies have no effect, install Calico:
 > `kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/v3.27.0/manifests/calico.yaml`

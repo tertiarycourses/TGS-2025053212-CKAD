@@ -2,7 +2,7 @@
 
 A Job runs Pods until a required number of successful completions is reached — then it stops. CKAD 2026 tests `completions`, `parallelism`, `backoffLimit`, and `activeDeadlineSeconds` in almost every sitting. You must be able to write a Job manifest from memory.
 
-**Lab environment:** [Play with Kubernetes](https://labs.play-with-k8s.com)
+**Lab environment:** [Play with Kubernetes](https://killercoda.com/playgrounds/course/kubernetes-playgrounds)
 
 **Required software (free):**
 - `kubectl` (pre-installed on Killercoda)

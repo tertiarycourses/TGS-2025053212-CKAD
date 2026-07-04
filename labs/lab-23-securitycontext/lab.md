@@ -2,7 +2,7 @@
 
 `securityContext` controls the identity and privileges of containers. CKAD 2026 regularly asks you to enforce non-root execution, read-only root filesystem, and dropped Linux capabilities. These fields appear at both Pod level (applies to all containers) and container level (overrides for one container).
 
-**Lab environment:** [Play with Kubernetes](https://labs.play-with-k8s.com)
+**Lab environment:** [Play with Kubernetes](https://killercoda.com/playgrounds/course/kubernetes-playgrounds)
 
 **Required software (free):**
 - `kubectl` (pre-installed on Killercoda)
