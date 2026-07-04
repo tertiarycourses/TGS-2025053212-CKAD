@@ -2,7 +2,7 @@
 
 Containers are ephemeral — any data written to the container filesystem is lost on restart. Volumes survive restarts and can be shared between containers. CKAD 2026 tests `emptyDir`, `emptyDir.medium: Memory`, `hostPath`, and mounting strategies.
 
-**Lab environment:** *(link to be added)*
+**Lab environment:** [Play with Kubernetes](https://labs.play-with-k8s.com)
 
 **Required software (free):**
 - `kubectl` (pre-installed on Killercoda)

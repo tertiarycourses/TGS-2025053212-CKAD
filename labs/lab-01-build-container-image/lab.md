@@ -2,7 +2,7 @@
 
 Write a Dockerfile from scratch, build a tagged image, run it locally, and inspect its layers. The CKAD 2026 exam expects you to read and write Dockerfiles confidently — you may be asked to fix a broken one or produce one under time pressure.
 
-**Lab environment:** *(link to be added)*
+**Lab environment:** [Play with Docker](https://labs.play-with-docker.com)
 
 **Required software (free):**
 - `docker` (pre-installed on Killercoda)

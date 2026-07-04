@@ -2,7 +2,7 @@
 
 Init containers run **in order, to completion**, before any main container starts. Use them to seed shared volumes, wait for upstream services, or do one-time setup. CKAD 2026 asks you to write init containers from scratch and read `Init:N/M` Pod status correctly.
 
-**Lab environment:** *(link to be added)*
+**Lab environment:** [Play with Kubernetes](https://labs.play-with-k8s.com)
 
 **Required software (free):**
 - `kubectl` (pre-installed on Killercoda)
