@@ -1,8 +1,8 @@
-# Lab 12 — Canary Deployment
+﻿# Lab 12 — Canary Deployment
 
 A canary release sends a small fraction of live traffic to a new version while keeping the bulk on the stable version. In Kubernetes, traffic split is approximated by controlling replica ratios behind a single broad Service selector — no special tooling required.
 
-**Lab environment:** [KillerCoda](https://killercoda.com/tertiary-labs-ckad/course/killercoda/lab-12-canary)
+**Lab environment:** [KillerCoda](https://killercoda.com/tertiarycourses/course/killercoda/lab-12-canary)
 
 **Required software (free):**
 - `kubectl` (pre-installed on Killercoda)

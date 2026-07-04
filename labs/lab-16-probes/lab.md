@@ -1,8 +1,8 @@
-# Lab 16 — Liveness, Readiness, and Startup Probes
+﻿# Lab 16 — Liveness, Readiness, and Startup Probes
 
 Kubernetes uses three probes to manage container health: **livenessProbe** restarts a failed container, **readinessProbe** removes it from Service endpoints, **startupProbe** gives slow apps time to boot before liveness begins. CKAD 2026 tests all three probe types (`httpGet`, `tcpSocket`, `exec`) and their timing fields.
 
-**Lab environment:** [KillerCoda](https://killercoda.com/tertiary-labs-ckad/course/killercoda/lab-16-probes)
+**Lab environment:** [KillerCoda](https://killercoda.com/tertiarycourses/course/killercoda/lab-16-probes)
 
 **Required software (free):**
 - `kubectl` (pre-installed on Killercoda)

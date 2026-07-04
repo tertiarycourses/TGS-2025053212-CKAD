@@ -1,8 +1,8 @@
-# Lab 25 — RBAC (Role and RoleBinding)
+﻿# Lab 25 — RBAC (Role and RoleBinding)
 
 RBAC controls who can do what on which resources. CKAD 2026 tests creating Roles, ClusterRoles, RoleBindings, and ClusterRoleBindings imperatively, and validating with `kubectl auth can-i --as`. You must know the difference between namespace-scoped and cluster-scoped permissions.
 
-**Lab environment:** [KillerCoda](https://killercoda.com/tertiary-labs-ckad/course/killercoda/lab-25-rbac)
+**Lab environment:** [KillerCoda](https://killercoda.com/tertiarycourses/course/killercoda/lab-25-rbac)
 
 **Required software (free):**
 - `kubectl` (pre-installed on Killercoda)

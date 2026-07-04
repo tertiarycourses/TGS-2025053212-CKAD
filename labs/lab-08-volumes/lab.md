@@ -1,8 +1,8 @@
-# Lab 8 — Volumes (emptyDir and hostPath)
+﻿# Lab 8 — Volumes (emptyDir and hostPath)
 
 Containers are ephemeral — any data written to the container filesystem is lost on restart. Volumes survive restarts and can be shared between containers. CKAD 2026 tests `emptyDir`, `emptyDir.medium: Memory`, `hostPath`, and mounting strategies.
 
-**Lab environment:** [KillerCoda](https://killercoda.com/tertiary-labs-ckad/course/killercoda/lab-08-volumes)
+**Lab environment:** [KillerCoda](https://killercoda.com/tertiarycourses/course/killercoda/lab-08-volumes)
 
 **Required software (free):**
 - `kubectl` (pre-installed on Killercoda)

@@ -1,7 +1,7 @@
-# Lab 14 — Kustomize Overlays
+﻿# Lab 14 — Kustomize Overlays
 
 Kustomize lets you reuse a single **base** set of manifests and apply environment-specific **overlays** without templating. It is built into `kubec...
 
-**Lab environment:** [KillerCoda](https://killercoda.com/tertiary-labs-ckad/course/killercoda/lab-14-kustomize)
+**Lab environment:** [KillerCoda](https://killercoda.com/tertiarycourses/course/killercoda/lab-14-kustomize)
 
 A pre-built Kubernetes cluster (controlplane + node01) is ready to use — `kubectl` works immediately.

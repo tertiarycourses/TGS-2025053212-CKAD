@@ -1,8 +1,8 @@
-# Lab 11 — Blue/Green Deployment
+﻿# Lab 11 — Blue/Green Deployment
 
 Blue/Green keeps two complete copies of the application alive simultaneously. A Service selector switch flips 100% of traffic from the old version (blue) to the new version (green) in one atomic operation — with instant rollback if anything breaks.
 
-**Lab environment:** [KillerCoda](https://killercoda.com/tertiary-labs-ckad/course/killercoda/lab-11-blue-green)
+**Lab environment:** [KillerCoda](https://killercoda.com/tertiarycourses/course/killercoda/lab-11-blue-green)
 
 **Required software (free):**
 - `kubectl` (pre-installed on Killercoda)

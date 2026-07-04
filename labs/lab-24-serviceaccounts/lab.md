@@ -1,8 +1,8 @@
-# Lab 24 — ServiceAccounts
+﻿# Lab 24 — ServiceAccounts
 
 Every Pod runs as a ServiceAccount. The `default` ServiceAccount has minimal RBAC permissions. CKAD 2026 tests creating dedicated ServiceAccounts, attaching them to Pods, disabling the auto-mounted token, and requesting short-lived tokens with `kubectl create token`.
 
-**Lab environment:** [KillerCoda](https://killercoda.com/tertiary-labs-ckad/course/killercoda/lab-24-serviceaccounts)
+**Lab environment:** [KillerCoda](https://killercoda.com/tertiarycourses/course/killercoda/lab-24-serviceaccounts)
 
 **Required software (free):**
 - `kubectl` (pre-installed on Killercoda)

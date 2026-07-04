@@ -1,8 +1,8 @@
-# Lab 1 — Build a Container Image with Docker
+﻿# Lab 1 — Build a Container Image with Docker
 
 Write a Dockerfile from scratch, build a tagged image, run it locally, and inspect its layers. The CKAD 2026 exam expects you to read and write Dockerfiles confidently — you may be asked to fix a broken one or produce one under time pressure.
 
-**Lab environment:** [KillerCoda](https://killercoda.com/tertiary-labs-ckad/course/killercoda/lab-01-build-container-image)
+**Lab environment:** [KillerCoda](https://killercoda.com/tertiarycourses/course/killercoda/lab-01-build-container-image)
 
 **Required software (free):**
 - `docker` (pre-installed on Killercoda)

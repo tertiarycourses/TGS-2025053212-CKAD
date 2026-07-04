@@ -1,8 +1,8 @@
-# Lab 26 — ResourceQuota and LimitRange
+﻿# Lab 26 — ResourceQuota and LimitRange
 
 `ResourceQuota` caps the **total** resources used across an entire namespace. `LimitRange` enforces **per-container** defaults and maximums. CKAD 2026 tests both objects — you must write the YAML, apply them, and understand the error messages when a workload is rejected.
 
-**Lab environment:** [KillerCoda](https://killercoda.com/tertiary-labs-ckad/course/killercoda/lab-26-quota-limitrange)
+**Lab environment:** [KillerCoda](https://killercoda.com/tertiarycourses/course/killercoda/lab-26-quota-limitrange)
 
 **Required software (free):**
 - `kubectl` (pre-installed on Killercoda)
