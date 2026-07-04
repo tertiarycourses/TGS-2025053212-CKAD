@@ -2,7 +2,7 @@
 
 Kustomize lets you reuse a single **base** set of manifests and apply environment-specific **overlays** without templating. It is built into `kubectl` (`-k` flag) — no installation required. CKAD 2026 tests `namePrefix`, `commonLabels`, `images`, and strategic-merge `patches`.
 
-**Lab environment:** [KillerCoda](https://killercoda.com/tertiarycourses/course/killercoda/lab-14-kustomize)
+**Lab environment:** [KillerCoda](https://killercoda.com/tertiarycourses/course/tertiary-labs/lab-14-kustomize)
 
 **Required software (free):**
 - `kubectl` (pre-installed on Killercoda — includes kustomize)

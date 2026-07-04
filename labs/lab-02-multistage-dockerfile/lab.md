@@ -2,7 +2,7 @@
 
 Separate the build stage from the runtime stage to produce images that are 10× smaller and contain no compiler toolchain. Multi-stage builds are a CKAD 2026 exam staple — you must be able to write one from scratch and explain why it shrinks the image.
 
-**Lab environment:** [KillerCoda](https://killercoda.com/tertiarycourses/course/killercoda/lab-02-multistage-dockerfile)
+**Lab environment:** [KillerCoda](https://killercoda.com/tertiarycourses/course/tertiary-labs/lab-02-multistage-dockerfile)
 
 **Required software (free):**
 - `docker` (pre-installed on Killercoda)
