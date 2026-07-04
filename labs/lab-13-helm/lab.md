@@ -2,7 +2,7 @@
 
 Helm is the Kubernetes package manager. A chart is a bundle of YAML templates; a release is a deployed instance. CKAD 2026 tests `helm install`, `helm upgrade`, `helm rollback`, `helm list`, and value overrides — all under exam time pressure.
 
-**Lab environment:** [KillerCoda](https://killercoda.com/tertiarycourses/course/tertiary-labs/lab-13-helm)
+**Lab environment:** [KillerCoda](https://killercoda.com/tertiarycourses/course/labs/lab-13-helm)
 
 **Required software (free):**
 - `helm` (install in Step 1 — one command)

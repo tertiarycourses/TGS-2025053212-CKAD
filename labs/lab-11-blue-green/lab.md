@@ -2,7 +2,7 @@
 
 Blue/Green keeps two complete copies of the application alive simultaneously. A Service selector switch flips 100% of traffic from the old version (blue) to the new version (green) in one atomic operation — with instant rollback if anything breaks.
 
-**Lab environment:** [KillerCoda](https://killercoda.com/tertiarycourses/course/tertiary-labs/lab-11-blue-green)
+**Lab environment:** [KillerCoda](https://killercoda.com/tertiarycourses/course/labs/lab-11-blue-green)
 
 **Required software (free):**
 - `kubectl` (pre-installed on Killercoda)
