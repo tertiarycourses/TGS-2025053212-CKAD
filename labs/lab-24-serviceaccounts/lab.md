@@ -2,7 +2,7 @@
 
 Every Pod runs as a ServiceAccount. The `default` ServiceAccount has minimal RBAC permissions. CKAD 2026 tests creating dedicated ServiceAccounts, attaching them to Pods, disabling the auto-mounted token, and requesting short-lived tokens with `kubectl create token`.
 
-**Lab environment:** [Play with Kubernetes](https://killercoda.com/playgrounds/course/kubernetes-playgrounds)
+**Lab environment:** [Play with Kubernetes](https://killercoda.com/playgrounds/course/kubernetes-playgrounds/two-node)
 
 **Required software (free):**
 - `kubectl` (pre-installed on Killercoda)

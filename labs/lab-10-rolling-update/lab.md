@@ -2,7 +2,7 @@
 
 A Deployment performs zero-downtime upgrades by gradually replacing Pods one ReplicaSet at a time. CKAD 2026 tests `maxSurge`, `maxUnavailable`, rollout pause/resume, history inspection, and rollback — frequently as a multi-step question under time pressure.
 
-**Lab environment:** [Play with Kubernetes](https://killercoda.com/playgrounds/course/kubernetes-playgrounds)
+**Lab environment:** [Play with Kubernetes](https://killercoda.com/playgrounds/course/kubernetes-playgrounds/two-node)
 
 **Required software (free):**
 - `kubectl` (pre-installed on Killercoda)

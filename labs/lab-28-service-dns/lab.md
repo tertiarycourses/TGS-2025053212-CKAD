@@ -2,7 +2,7 @@
 
 CoreDNS gives every Service a stable DNS name. The full FQDN is `<service>.<namespace>.svc.cluster.local`. CKAD 2026 tests cross-namespace DNS resolution, Pod DNS records, headless Services, and reading `/etc/resolv.conf` to understand `ndots:5`.
 
-**Lab environment:** [Play with Kubernetes](https://killercoda.com/playgrounds/course/kubernetes-playgrounds)
+**Lab environment:** [Play with Kubernetes](https://killercoda.com/playgrounds/course/kubernetes-playgrounds/two-node)
 
 **Required software (free):**
 - `kubectl` (pre-installed on Killercoda)

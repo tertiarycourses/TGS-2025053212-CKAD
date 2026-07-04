@@ -2,7 +2,7 @@
 
 RBAC controls who can do what on which resources. CKAD 2026 tests creating Roles, ClusterRoles, RoleBindings, and ClusterRoleBindings imperatively, and validating with `kubectl auth can-i --as`. You must know the difference between namespace-scoped and cluster-scoped permissions.
 
-**Lab environment:** [Play with Kubernetes](https://killercoda.com/playgrounds/course/kubernetes-playgrounds)
+**Lab environment:** [Play with Kubernetes](https://killercoda.com/playgrounds/course/kubernetes-playgrounds/two-node)
 
 **Required software (free):**
 - `kubectl` (pre-installed on Killercoda)

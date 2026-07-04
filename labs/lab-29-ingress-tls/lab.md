@@ -2,7 +2,7 @@
 
 An Ingress provides Layer 7 (HTTP/HTTPS) routing: hostname and path rules that forward traffic to backend Services. CKAD 2026 tests installing an Ingress controller, creating TLS Secrets, host routing, and path-based routing with `pathType`.
 
-**Lab environment:** [Play with Kubernetes](https://killercoda.com/playgrounds/course/kubernetes-playgrounds)
+**Lab environment:** [Play with Kubernetes](https://killercoda.com/playgrounds/course/kubernetes-playgrounds/two-node)
 
 **Required software (free):**
 - `kubectl` (pre-installed on Killercoda)
