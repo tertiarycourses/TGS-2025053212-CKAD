@@ -2,7 +2,7 @@
 
 A Service gives a stable virtual IP and DNS name to a set of Pods. CKAD 2026 requires fluency with `ClusterIP`, `NodePort`, and `LoadBalancer` types, `kubectl expose`, endpoint debugging, and the selector-mismatch pattern.
 
-**Lab environment:** [KillerCoda](https://killercoda.com/tertiarycourses/course/labs/lab-27-services)
+**Lab environment:** *(link to be added)*
 
 **Required software (free):**
 - `kubectl` (pre-installed on Killercoda)

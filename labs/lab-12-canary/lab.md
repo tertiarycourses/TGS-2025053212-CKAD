@@ -2,7 +2,7 @@
 
 A canary release sends a small fraction of live traffic to a new version while keeping the bulk on the stable version. In Kubernetes, traffic split is approximated by controlling replica ratios behind a single broad Service selector — no special tooling required.
 
-**Lab environment:** [KillerCoda](https://killercoda.com/tertiarycourses/course/labs/lab-12-canary)
+**Lab environment:** *(link to be added)*
 
 **Required software (free):**
 - `kubectl` (pre-installed on Killercoda)

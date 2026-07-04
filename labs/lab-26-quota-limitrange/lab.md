@@ -2,7 +2,7 @@
 
 `ResourceQuota` caps the **total** resources used across an entire namespace. `LimitRange` enforces **per-container** defaults and maximums. CKAD 2026 tests both objects — you must write the YAML, apply them, and understand the error messages when a workload is rejected.
 
-**Lab environment:** [KillerCoda](https://killercoda.com/tertiarycourses/course/labs/lab-26-quota-limitrange)
+**Lab environment:** *(link to be added)*
 
 **Required software (free):**
 - `kubectl` (pre-installed on Killercoda)

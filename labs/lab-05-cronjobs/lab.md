@@ -2,7 +2,7 @@
 
 A CronJob creates Jobs on a time-based schedule using standard cron syntax. CKAD 2026 tests `concurrencyPolicy`, `startingDeadlineSeconds`, history limits, manual triggers, and suspend/resume. These fields appear verbatim in exam questions.
 
-**Lab environment:** [KillerCoda](https://killercoda.com/tertiarycourses/course/labs/lab-05-cronjobs)
+**Lab environment:** *(link to be added)*
 
 **Required software (free):**
 - `kubectl` (pre-installed on Killercoda)
