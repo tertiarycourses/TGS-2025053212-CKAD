@@ -1,0 +1,8 @@
+{
+  "title": "Certified Kubernetes Application Developer (CKAD)",
+  "description": "Hands-on lab course covering all CKAD 2026 exam domains: containers, workloads, scheduling, services, networking, storage, security, and observability.",
+  "difficulty": "intermediate",
+  "details": {
+    "steps": []
+  }
+}
