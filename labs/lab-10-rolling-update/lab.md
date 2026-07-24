@@ -46,13 +46,17 @@ k describe deployment web | grep -A4 RollingUpdateStrategy
 k set image deployment/web nginx=nginx:1.25
 k rollout status deployment/web
 k get rs -l app=web
+k rollout history deployment/web
 ```
 
 Watch the old ReplicaSet drain to 0 while the new one ramps to 4.
+Confirm `REVISION 2` appears in the history before continuing to Step 5.
 
 ---
 
 ## Step 5 — View rollout history
+
+> **Prerequisite:** revision 2 must exist from Step 4. If only revision 1 shows, re-run `k set image deployment/web nginx=nginx:1.25` and wait for `k rollout status` to complete.
 
 ```bash
 k rollout history deployment/web
