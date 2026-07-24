@@ -99,6 +99,14 @@ k get pod app-waiting -w
 
 Once CoreDNS can resolve `db.default.svc.cluster.local`, the init container exits and the main container starts. Press Ctrl+C after status shows `Running`.
 
+Verify the successful resolution at the end of the init container logs (not `head` — the first lines are all NXDOMAIN from early retries):
+
+```bash
+k logs app-waiting -c wait-for-db | tail -10
+```
+
+The last entries will show a successful `nslookup` returning the ClusterIP of the `db` service.
+
 ---
 
 ## Step 6 — Clean up
