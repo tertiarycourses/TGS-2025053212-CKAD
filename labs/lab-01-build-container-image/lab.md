@@ -2,7 +2,7 @@
 
 Write a Dockerfile from scratch, build a tagged image, run it locally, and inspect its layers. The CKAD 2026 exam expects you to read and write Dockerfiles confidently — you may be asked to fix a broken one or produce one under time pressure.
 
-**Lab environment:** [Play with Docker](https://labs.play-with-docker.com)
+**Lab environment:** [Killercoda Ubuntu Playground](https://killercoda.com/playgrounds/scenario/ubuntu)
 
 **Required software (free):**
 - `docker` (pre-installed on Killercoda)
@@ -14,10 +14,9 @@ Write a Dockerfile from scratch, build a tagged image, run it locally, and inspe
 
 ```bash
 docker version
-kubectl get nodes
 ```
 
-Confirm Docker Client + Server are both shown and at least one node is `Ready` before continuing.
+Confirm Docker Client + Server are both shown before continuing.
 
 ---
 
@@ -126,7 +125,7 @@ Verify: `docker ps -a | grep hello` and `docker images | grep hello` should both
 
 - **Dockerfile reference** — official instruction docs: https://docs.docker.com/reference/dockerfile/
 - **DockerHub** — search for base images: https://hub.docker.com
-- **Play with Docker** — alternative browser Docker environment: https://labs.play-with-docker.com
+- **Killercoda Ubuntu Playground** — browser-based Ubuntu environment: https://killercoda.com/playgrounds/scenario/ubuntu
 - **Kubernetes docs** (allowed in CKAD exam): https://kubernetes.io/docs/
 
 ---
