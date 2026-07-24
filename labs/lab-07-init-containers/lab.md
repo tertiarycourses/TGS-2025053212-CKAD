@@ -80,11 +80,13 @@ spec:
     image: nginx:1.25
 EOF
 k apply -f wait.yaml
+sleep 5
 k get pod app-waiting
 k logs app-waiting -c wait-for-db | head -5
 ```
 
 The Pod stays in `Init:0/1` until DNS resolves. This is a blocking readiness gate.
+The `sleep 5` gives the init container time to start before fetching logs — running `k logs` immediately after `apply` hits `PodInitializing` and returns an error.
 
 ---
 
