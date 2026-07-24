@@ -23,6 +23,9 @@ export do="--dry-run=client -o yaml"
 
 ```bash
 k create job hello --image=busybox -- echo "hello CKAD 2026"
+
+wait for 1 min and run the below
+
 k get jobs,pods -l job-name=hello
 k logs -l job-name=hello
 ```
