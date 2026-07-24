@@ -82,12 +82,13 @@ spec:
         command: ["sh", "-c", "exit 1"]
 EOF
 k apply -f fail.yaml
-sleep 30
+k wait --for=condition=failed job/must-fail --timeout=120s
 k get pods -l job-name=must-fail
-k describe job must-fail | grep -A2 Conditions
+k describe job must-fail | grep -A5 Conditions
 ```
 
 After three failures (1 attempt + 2 retries) the Job status shows `BackoffLimitExceeded`.
+`k wait` blocks until the Job controller writes the `Failed` condition — more reliable than a fixed sleep.
 
 ---
 
@@ -110,8 +111,8 @@ spec:
         command: ["sh", "-c", "sleep 60"]
 EOF
 k apply -f deadline.yaml
-sleep 15
-k describe job too-slow | grep -A2 Conditions
+k wait --for=condition=failed job/too-slow --timeout=30s
+k describe job too-slow | grep -A5 Conditions
 ```
 
 `activeDeadlineSeconds` limits total Job wall-clock time. The Job is terminated with `DeadlineExceeded` regardless of `backoffLimit`.
