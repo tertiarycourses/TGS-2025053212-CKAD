@@ -84,11 +84,18 @@ EOF
 k apply -f fail.yaml
 k wait --for=condition=failed job/must-fail --timeout=120s
 k get pods -l job-name=must-fail
-k describe job must-fail | grep -A5 Conditions
+k get job must-fail -o jsonpath='{range .status.conditions[*]}{.type}: {.reason}{"\n"}{end}'
 ```
 
-After three failures (1 attempt + 2 retries) the Job status shows `BackoffLimitExceeded`.
+Expected output:
+```
+job.batch/must-fail condition met
+Failed: BackoffLimitExceeded
+```
+
+After three failures (1 attempt + 2 retries) the Job condition shows `BackoffLimitExceeded`.
 `k wait` blocks until the Job controller writes the `Failed` condition — more reliable than a fixed sleep.
+`jsonpath` reads conditions directly from the API object; `kubectl describe` dropped the Conditions section in Kubernetes 1.28+.
 
 ---
 
@@ -112,7 +119,7 @@ spec:
 EOF
 k apply -f deadline.yaml
 k wait --for=condition=failed job/too-slow --timeout=30s
-k describe job too-slow | grep -A5 Conditions
+k get job too-slow -o jsonpath='{range .status.conditions[*]}{.type}: {.reason}{"\n"}{end}'
 ```
 
 `activeDeadlineSeconds` limits total Job wall-clock time. The Job is terminated with `DeadlineExceeded` regardless of `backoffLimit`.
