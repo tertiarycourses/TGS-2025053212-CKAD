@@ -55,6 +55,7 @@ spec:
     targetPort: 80
 EOF
 k apply -f blue.yaml
+k rollout status deployment/web-blue
 k get pods -l app=web --show-labels
 ```
 
@@ -85,6 +86,7 @@ spec:
         image: nginx:1.25
 EOF
 k apply -f green.yaml
+k rollout status deployment/web-green
 k get pods -l app=web --show-labels
 ```
 
