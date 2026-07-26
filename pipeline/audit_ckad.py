@@ -106,12 +106,23 @@ def audit(pptx_path):
                         })
                         break
 
-        # Rule 2: every lab header must have KillerCoda URL
+        # Rule 2: every lab section must be present (header or commands slide)
         if not fullslide and re.search(r'\bLAB\s+\d+\b', up):
+            # Accept header slides (have DAY/DOMAIN) or lab activity slides (COMMANDS/TEST IT/STEP)
+            is_lab_slide = (
+                "DAY" in up or "DOMAIN" in up
+                or re.search(r'\bCOMMANDS?\b', up)
+                or "TEST IT" in up
+                or re.match(r'LAB\s+\d+', up.strip())
+            )
+            if is_lab_slide:
+                n = lab_num(up)
+                if n and n not in [ln for _, ln in seen_labs]:
+                    seen_labs.append((snum, n))
+            # Check KillerCoda URL only on header slides (DAY/DOMAIN context)
             if "DAY" in up or "DOMAIN" in up:
                 n = lab_num(up)
                 if n:
-                    seen_labs.append((snum, n))
                     expected_url = LAB_URLS.get(n, "")
                     if expected_url and expected_url not in low:
                         violations.append({
