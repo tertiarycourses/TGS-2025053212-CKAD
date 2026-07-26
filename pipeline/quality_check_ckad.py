@@ -106,28 +106,31 @@ def slide_text_parts(slide):
 
 def extract_text_slide_title(slide):
     """
-    For a designed text slide, try to find a meaningful topic title.
-    Returns the cleaned title string, or None if we can't determine one.
+    For a designed text slide, find the topic title (not the eyebrow category label).
+    Collects all candidate lines, then returns the first one that has >= 3 words
+    after normalising — this skips single-word eyebrow labels like "FOUNDATIONS".
     """
     parts = slide_text_parts(slide)
     if not parts:
         return None
 
-    # Look for a part that looks like a topic heading:
-    # It should NOT be a section label (short ALL-CAPS) or a footer.
+    candidates = []
     for part in parts:
         lines = [l.strip() for l in part.split('\n') if l.strip()]
         for line in lines:
-            # Skip short labels and footers
             if len(line) < 8:
                 continue
             if re.match(r'^(LAB\s+\d+|STEP\s+\d+|DAY\s+\d+\s*·)', line, re.I):
                 continue
             if re.match(r'^(Tertiary|©|http)', line, re.I):
                 continue
-            # This looks like a topic title
-            return line
-    return None
+            candidates.append(line)
+
+    # Prefer a candidate whose normalised form has >= 3 words (skips one-word labels)
+    for c in candidates:
+        if len(normalise(c).split()) >= 3:
+            return c
+    return candidates[0] if candidates else None
 
 
 def remove_slides(prs, remove_idx):
