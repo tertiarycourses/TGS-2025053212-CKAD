@@ -253,12 +253,25 @@ def check2_killercoda_urls(slides, prs):
 
 
 def check3_admin_slides(slides, prs):
-    """No housekeeping / admin slides."""
+    """No housekeeping / admin slides — skips intentional intro slides before first section divider."""
     flags = []
+    content_started = False
     for i, slide in enumerate(slides):
         if is_fullslide_image(slide, prs):
             continue
-        low = " | ".join(slide_text_parts(slide)).lower()
+        parts = slide_text_parts(slide)
+        low = " | ".join(parts).lower()
+        up  = low.upper()
+        # Mark content started once we hit a real DAY/DOMAIN section divider
+        # Exclude lesson-plan slides that mention days in their body text
+        if not content_started:
+            is_schedule = 'LESSON PLAN' in up or 'SCHEDULE' in up
+            if not is_schedule:
+                if re.search(r'\bDAY\s+\d+\b', up) or re.search(r'\bDOMAIN\s+\d+\b', up):
+                    if not re.search(r'\bLAB\s+\d+\b', up):
+                        content_started = True
+        if not content_started:
+            continue   # skip admin check for intentional intro slides
         wc = len(re.findall(r'[a-zA-Z]{3,}', low))
         if wc < 2:
             continue

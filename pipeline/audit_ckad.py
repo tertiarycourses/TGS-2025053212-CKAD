@@ -84,6 +84,7 @@ def audit(pptx_path):
 
     seen_labs = []
     seen_domains = []
+    content_started = False  # True once the first DAY/DOMAIN section divider is seen
 
     for i, slide in enumerate(slides):
         snum = i + 1
@@ -93,8 +94,18 @@ def audit(pptx_path):
 
         fullslide = is_fullslide_image(slide, prs)
 
-        # Rule 1: no admin slides (even if they have small images)
-        if not fullslide:
+        # Mark content as started once we see a real section divider
+        # Exclude lesson-plan/schedule slides that mention "Day N" in their body text
+        if not content_started and not fullslide:
+            is_schedule = 'LESSON PLAN' in up or 'SCHEDULE' in up
+            if not is_schedule:
+                if re.search(r'\bDAY\s+\d+\b', up) or re.search(r'\bDOMAIN\s+\d+\b', up):
+                    if not re.search(r'\bLAB\s+\d+\b', up):
+                        content_started = True
+
+        # Rule 1: no admin slides — skip the intro section (slides before first DAY marker)
+        # Intro slides (trainer, schedule, attendance) are intentional and should not be flagged.
+        if not fullslide and content_started:
             wc = len(re.findall(r'[a-zA-Z]{3,}', low))
             if wc >= 2:
                 for p in ADMIN_PATTERNS:
@@ -131,10 +142,18 @@ def audit(pptx_path):
                             "text": raw[:80]
                         })
 
-        # Rule 3: track domain markers for ordering check
-        for dm in DOMAIN_MARKERS:
-            if dm in up and dm not in seen_domains:
-                seen_domains.append(dm)
+        # Rule 3: track domain markers for ordering check — only from real section-divider slides.
+        # Exclude lesson-plan/schedule slides that mention days in their body text.
+        is_divider_slide = (not fullslide and
+                            'LESSON PLAN' not in up and 'SCHEDULE' not in up and
+                            not re.search(r'\bLAB\s+\d+\b', up) and
+                            ("DAY" in up or "DOMAIN" in up))
+        if is_divider_slide:
+            for dm in DOMAIN_MARKERS:
+                if dm in up and dm not in seen_domains:
+                    seen_domains.append(dm)
+                    if not content_started:
+                        content_started = True
 
     # Rule 4: all 30 labs must be present
     found_lab_nums = sorted(set(n for _, n in seen_labs))
