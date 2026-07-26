@@ -103,7 +103,7 @@ DOMAIN_SECTIONS = [
      "find": ["SECURITYCONTEXT", "TEST IT"]},
     {"name": "ServiceAccounts",        "pdf": PDF2, "p_start": 100, "p_end": 107,
      "find": ["SERVICEACCOUNTS", "TEST IT"]},
-    {"name": "RBAC",                   "pdf": PDF2, "p_start": 83,  "p_end": 107,
+    {"name": "RBAC",                   "pdf": PDF2, "p_start": 83,  "p_end": 100,
      "find": ["ROLES & ROLEBINDINGS", "TEST IT"]},
     {"name": "CRDs",                   "pdf": PDF3, "p_start": 62,  "p_end": 72,
      "find": ["KEY TAKEAWAYS", "IMPLEMENT A CRD"]},
@@ -114,7 +114,7 @@ DOMAIN_SECTIONS = [
      "find": ["DAEMONSETS AND STATEFULSETS", "TEST IT"]},
     {"name": "Services",               "pdf": PDF2, "p_start": 22,  "p_end": 55,
      "find": ["CLUSTERIP, NODEPORT, LOADBALANCER", "TEST IT"]},
-    {"name": "Ingress and TLS",        "pdf": PDF2, "p_start": 55,  "p_end": 68,
+    {"name": "Ingress and TLS",        "pdf": PDF2, "p_start": 55,  "p_end": 67,
      "find": ["INGRESS WITH TLS", "TEST IT"]},
     {"name": "NetworkPolicy",          "pdf": PDF2, "p_start": 67,  "p_end": 82,
      "find": ["NETWORKPOLICY", "TEST IT"]},
@@ -261,6 +261,32 @@ prs.save(DRAFT_PATH)
 print(f"  Total images added: {total_added}")
 
 
+# ── Step 6b: Deduplicate image slides ────────────────────────────────────────
+
+print(f"\n{'='*65}")
+print("STEP 6b — Deduplicate identical image slides")
+print(f"{'='*65}")
+
+DEDUP_SCRIPT = os.path.join(os.path.dirname(__file__), "dedupe_ckad.py")
+DEDUPED_PATH = TMP_DIR + r"\v4_deduped.pptx"
+
+dedup_result = subprocess.run(
+    [PY, DEDUP_SCRIPT, DRAFT_PATH, DEDUPED_PATH],
+    capture_output=True, text=True, encoding='utf-8', errors='replace'
+)
+try:
+    dedup_report = json.loads(dedup_result.stdout)
+    removed = dedup_report["duplicates_removed"]
+    print(f"  Duplicates removed: {removed}")
+    if removed:
+        print(f"  Removed slides: {dedup_report['removed_slides']}")
+    print(f"  Slides after dedupe: {dedup_report['total_out']}")
+    current_for_audit = DEDUPED_PATH
+except json.JSONDecodeError:
+    print("  [DEDUPE WARNING] Could not parse output — using draft as-is")
+    current_for_audit = DRAFT_PATH
+
+
 # ── Step 7: Audit + fix loop ─────────────────────────────────────────────────
 
 print(f"\n{'='*65}")
@@ -272,7 +298,7 @@ AUDIT_SCRIPT = os.path.join(os.path.dirname(__file__), "audit_ckad.py")
 FIX_SCRIPT   = os.path.join(os.path.dirname(__file__), "fix_ckad.py")
 PY = sys.executable
 
-current = DRAFT_PATH
+current = current_for_audit
 for iteration in range(1, 6):
     print(f"\n  ── Iteration {iteration} ──")
     result = subprocess.run([PY, AUDIT_SCRIPT, current],
